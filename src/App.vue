@@ -1,18 +1,17 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link>
-    <router-link to="/about">About</router-link>
+  <Navbar />
+  <div class="content min-h-screen min-w-screen bg-gray-900">
+    <router-view />
   </div>
-  <router-view />
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
-import Hero from './components/Hero.vue'
+import Navbar from './components/Navbar.vue'
 
 @Options({
   components: {
-    Hero
+    Navbar
   }
 })
 export default class App extends Vue {}

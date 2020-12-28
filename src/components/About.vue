@@ -1,20 +1,13 @@
 <template>
-  <div>
+  <div class="text-3xl pt-16 text-white">
     About
   </div>
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component'
+import { Vue } from 'vue-class-component'
 
-@Options({
-  props: {
-    msg: String
-  }
-})
-export default class About extends Vue {
-  msg!: string
-}
+export default class About extends Vue {}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

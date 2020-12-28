@@ -1,7 +1,9 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <div class="min-h-screen min-w-screen bg-gray-900">test</div>
-  <Hero />
+  <div id="nav">
+    <router-link to="/">Home</router-link>
+    <router-link to="/about">About</router-link>
+  </div>
+  <router-view />
 </template>
 
 <script lang="ts">

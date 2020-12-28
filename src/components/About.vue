@@ -1,5 +1,7 @@
 <template>
-  <div class="hero">Hero</div>
+  <div>
+    About
+  </div>
 </template>
 
 <script lang="ts">
@@ -10,7 +12,7 @@ import { Options, Vue } from 'vue-class-component'
     msg: String
   }
 })
-export default class Hero extends Vue {
+export default class About extends Vue {
   msg!: string
 }
 </script>

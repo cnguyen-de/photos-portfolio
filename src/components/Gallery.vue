@@ -1,9 +1,9 @@
 <template>
-  <div class="text-3xl pt-16 text-white">
+  <div class="text-3xl pt-16 text-white flex justify-center">
     <div class="container">
-      <figure>
-        <img src="https://assets.codepen.io/12005/windmill.jpg" alt="A windmill" />
-        <figcaption><a href="#">1</a></figcaption>
+      <figure v-for="image of array" :key="image">
+        <img :src="image" alt="" />
+        <figcaption><a href="#"></a></figcaption>
       </figure>
     </div>
   </div>
@@ -11,8 +11,28 @@
 
 <script lang="ts">
 import { Vue } from 'vue-class-component'
-export default class Gallery extends Vue {}
+export default class Gallery extends Vue {
+  array = ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg']
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>
+<style scoped>
+.container {
+  column-count: 3;
+  column-gap: 16px;
+}
+
+figure {
+  margin: 0;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  margin-bottom: 16px;
+  break-inside: avoid;
+}
+
+figure > img {
+  grid-row: 1 / -1;
+  grid-column: 1;
+}
+</style>

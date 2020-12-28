@@ -1,16 +1,16 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png" />
   <div class="min-h-screen min-w-screen bg-gray-900">test</div>
-  <HelloWorld />
+  <Hero />
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
-import HelloWorld from './components/HelloWorld.vue'
+import Hero from './components/Hero.vue'
 
 @Options({
   components: {
-    HelloWorld
+    Hero
   }
 })
 export default class App extends Vue {}

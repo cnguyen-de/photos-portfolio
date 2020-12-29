@@ -1,5 +1,5 @@
 <template>
-  <div class="text-3xl pt-16 text-white">
+  <div class="text-3xl pl-40 text-white">
     About
   </div>
 </template>

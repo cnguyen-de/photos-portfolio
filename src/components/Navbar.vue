@@ -1,6 +1,6 @@
 <template>
   <div
-    class="nav absolute left-0 text-white bg-opacity-50 z-50 bg-gradient-to-r from-transBlack to-transparent h-screen w-52 flex flex-col items-center justify-center"
+    class="nav fixed left-0 text-white bg-opacity-50 z-50 bg-gradient-to-r from-transBlack to-transparent min-h-screen w-52 flex flex-col items-center justify-center"
   >
     <router-link to="/" class="p-2">
       <span class="text-2xl text-white">Home</span>

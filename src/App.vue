@@ -1,6 +1,6 @@
 <template>
   <Navbar />
-  <div class="content min-h-screen min-w-screen bg-gray-900">
+  <div class="content min-h-screen min-w-screen bg-gray-900 select-none">
     <router-view />
   </div>
 </template>

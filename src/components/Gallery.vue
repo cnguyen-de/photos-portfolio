@@ -2,7 +2,7 @@
   <div class="text-3xl pt-16 text-white flex justify-center">
     <div class="container">
       <figure v-for="image of array" :key="image">
-        <img :src="image" alt="" />
+        <img :src="image" @contextmenu.prevent="" alt="" />
         <figcaption><a href="#"></a></figcaption>
       </figure>
     </div>

@@ -10,6 +10,10 @@
       <span class="text-2xl text-blue-300">Gallery</span>
     </router-link>
 
+    <router-link to="/albums" class="p-2">
+      <span class="text-2xl text-blue-300">Albums</span>
+    </router-link>
+
     <router-link to="/about" class="p-2">
       <span class="text-2xl text-blue-300">About</span>
     </router-link>

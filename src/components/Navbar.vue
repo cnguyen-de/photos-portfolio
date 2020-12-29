@@ -1,21 +1,21 @@
 <template>
   <div
-    class="nav absolute top-0 text-white bg-opacity-50 z-50 bg-gradient-to-b from-transBlack to-transparent w-screen h-16 flex flex-row items-center justify-center"
+    class="nav absolute left-0 text-white bg-opacity-50 z-50 bg-gradient-to-r from-transBlack to-transparent h-screen w-52 flex flex-col items-center justify-center"
   >
     <router-link to="/" class="p-2">
-      <span class="text-2xl text-blue-300">Home</span>
+      <span class="text-2xl text-white">Home</span>
     </router-link>
 
     <router-link to="/gallery" class="p-2">
-      <span class="text-2xl text-blue-300">Gallery</span>
+      <span class="text-2xl text-white">Gallery</span>
     </router-link>
 
     <router-link to="/albums" class="p-2">
-      <span class="text-2xl text-blue-300">Albums</span>
+      <span class="text-2xl text-white">Albums</span>
     </router-link>
 
     <router-link to="/about" class="p-2">
-      <span class="text-2xl text-blue-300">About</span>
+      <span class="text-2xl text-white">About</span>
     </router-link>
   </div>
 </template>

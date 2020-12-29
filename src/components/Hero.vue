@@ -1,14 +1,18 @@
 <template>
   <div class="hero">
     <div ref="bgImage" class="hero__bg-image h-screen bg-cover" style="background-image: url('1.jpg');">
+      <!-- 
       <div
         class="hero__overlay bg-opacity-50 bg-black absolute z-10 h-screen w-screen grid items-center justify-center"
       >
+      
         <div class="hero__text text-center text-gray-100">
           <p class="hero__title text-4xl md:text-6xl pb-4">A Photography Portfolio</p>
           <p class="hero__subtitle text-2xl md:text-3xl italic">Bich Bui</p>
         </div>
+
       </div>
+       -->
     </div>
   </div>
 </template>

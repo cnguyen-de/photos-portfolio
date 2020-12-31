@@ -1,5 +1,5 @@
 <template>
-  <div class="text-3xl pl-40 text-white flex justify-center">
+  <div class="text-3xl pt-20 p-4 md:pl-40 text-white flex justify-center">
     <div class="container">
       <figure v-for="image of array" :key="image">
         <img :src="image" @contextmenu.prevent="" alt="" />

@@ -1,6 +1,7 @@
 <template>
   <div class="hero">
-    <div ref="bgImage" class="hero__bg-image h-screen bg-cover" style="background-image: url('1.jpg');">
+    <div ref="bgImage" class="hero__bg-image h-screen w-screen">
+      <img class="absolute object-cover h-full w-full" src="1.jpg" />
       <!-- 
       <div
         class="hero__overlay bg-opacity-50 bg-black absolute z-10 h-screen w-screen grid items-center justify-center"
@@ -29,7 +30,7 @@ import Navbar from './Navbar.vue'
 export default class Hero extends Vue {
   array = ['1', '2', '3', '4']
   mounted() {
-    let count = 1
+    /* let count = 1
     const bgImageElement = document.querySelector('.hero__bg-image')
     setInterval(() => {
       count++
@@ -37,7 +38,7 @@ export default class Hero extends Vue {
         count = 1
       }
       bgImageElement?.setAttribute('style', 'background-image: url("' + count + '.jpg");')
-    }, 5000)
+    }, 5000) */
   }
 }
 </script>

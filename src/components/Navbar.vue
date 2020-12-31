@@ -4,25 +4,29 @@
       class="nav fixed left-0 text-white bg-opacity-50 z-50 bg-gradient-to-r from-transBlack to-transparent min-h-screen w-52 md:flex flex-col justify-between items-center"
       :class="{ 'hidden w-0': !isNavbarDisplayed, 'flex w-52': isNavbarDisplayed }"
     >
-      <div class=" logo text-2xl text-white pt-20"><span class="hidden md:block">Bich Bui</span></div>
+      <div class=" logo text-2xl text-white pt-10 lg:pt-24">
+        <span class="hidden md:block">
+          <router-link to="/" class="p-2">
+            <span class="text-base lg:text-2xl text-white" @click="toggleNavbar()">Bich Bui</span>
+          </router-link>
+        </span>
+      </div>
+      <div class="flex-grow"></div>
       <div class="nav__links flex flex-col">
-        <router-link to="/" class="p-2">
-          <span class="text-2xl text-white" @click="toggleNavbar()">Home</span>
-        </router-link>
-
         <router-link to="/gallery" class="p-2">
-          <span class="text-2xl text-white" @click="toggleNavbar()">{{ $t('nav.gallery') }}</span>
+          <span class="text-base lg:text-2xl text-white" @click="toggleNavbar()">{{ $t('nav.gallery') }}</span>
         </router-link>
 
         <router-link to="/albums" class="p-2">
-          <span class="text-2xl text-white" @click="toggleNavbar()">{{ $t('nav.album') }}</span>
+          <span class="text-base lg:text-2xl text-white" @click="toggleNavbar()">{{ $t('nav.album') }}</span>
         </router-link>
 
         <router-link to="/about" class="p-2">
-          <span class="text-2xl text-white" @click="toggleNavbar()">{{ $t('nav.about') }}</span>
+          <span class="text-base lg:text-2xl text-white" @click="toggleNavbar()">{{ $t('nav.about') }}</span>
         </router-link>
       </div>
-      <LanguageSwitcher class="pb-20" />
+      <div class="flex-grow"></div>
+      <LanguageSwitcher class="w-full px-16 pb-10 lg:pb-20" />
     </div>
     <div
       class="md:hidden flex fixed h-16 left-0 bg-opacity-50 z-50 bg-gradient-to-b from-transBlack to-transparent w-screen items-center justify-center"

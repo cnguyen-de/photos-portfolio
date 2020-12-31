@@ -38,7 +38,7 @@ export default class LanguageSwitcher extends Vue {
     const supportedLanguages = ['en', 'de', 'vi']
     let browserLanguage = this.getFirstBrowserLanguage()
     if (browserLanguage) {
-      if (this.getFirstBrowserLanguage().includes('en')) {
+      if (this.getFirstBrowserLanguage()?.includes('en')) {
         browserLanguage = 'en'
       }
       if (supportedLanguages.includes(browserLanguage)) {
@@ -52,27 +52,29 @@ export default class LanguageSwitcher extends Vue {
 
   getFirstBrowserLanguage() {
     const nav = window.navigator
-    const browserLanguagePropertyKeys = ['language', 'browserLanguage', 'systemLanguage', 'userLanguage']
     let i
-    let language
+    let language: string
 
     // support for HTML 5.1 "navigator.languages"
     if (Array.isArray(nav.languages)) {
       for (i = 0; i < nav.languages.length; i++) {
-        language = String(nav.languages[i])
+        language = nav.languages[i]
         if (language && language.length) {
           return language
         }
       }
     }
-
+    /* 
+    const browserLanguagePropertyKeys = ['language', 'browserLanguage', 'systemLanguage', 'userLanguage']
     // support for other well known properties in browsers
     for (i = 0; i < browserLanguagePropertyKeys.length; i++) {
-      language = String(nav[browserLanguagePropertyKeys[i]])
+      // eslint-disable-next-line no-undef
+      console.log(browserLanguagePropertyKeys)
+      language = nav[browserLanguagePropertyKeys[i]]
       if (language && language.length) {
         return language
       }
-    }
+    } */
 
     return null
   }

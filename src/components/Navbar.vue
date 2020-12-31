@@ -26,7 +26,7 @@
         </router-link>
       </div>
       <div class="flex-grow"></div>
-      <LanguageSwitcher class="w-full px-16 pb-10 lg:pb-20" />
+      <LanguageSwitcher class="w-full px-16 lg:pb-10 pb-20" />
     </div>
     <div
       class="nav--mobile md:hidden flex fixed h-16 left-0 bg-opacity-50 z-50 bg-gradient-to-b from-transBlack to-transparent w-screen items-center justify-center"
@@ -55,7 +55,7 @@
         </svg>
       </button>
 
-      <div class="logo text-xl text-white">
+      <div class="nav__logo--mobile text-xl text-white">
         <router-link to="/" class="p-2">
           <span @click="toggleNavbar(false)">Bich Bui</span>
         </router-link>

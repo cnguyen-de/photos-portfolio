@@ -4,6 +4,7 @@
       <figure v-for="image of array" :key="image">
         <img
           class="rounded-lg cursor-pointer"
+          loading="lazy"
           :src="image"
           @contextmenu.prevent=""
           alt=""

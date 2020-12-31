@@ -1,7 +1,10 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import Vue from 'vue'
+import VueRouter from 'vue-router'
 import Hero from '@/components/Hero.vue'
 
-const routes: Array<RouteRecordRaw> = [
+Vue.use(VueRouter)
+
+export const routes = [
   {
     path: '/',
     name: 'Home',
@@ -24,9 +27,9 @@ const routes: Array<RouteRecordRaw> = [
   }
 ]
 
-const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
-  routes
+const router = new VueRouter({
+  routes,
+  mode: 'history'
 })
 
 export default router

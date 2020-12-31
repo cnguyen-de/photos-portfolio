@@ -19,10 +19,10 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component'
+import { Component, Vue } from 'vue-property-decorator'
 import Navbar from './Navbar.vue'
 
-@Options({
+@Component({
   components: {
     Navbar
   }

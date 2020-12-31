@@ -10,7 +10,9 @@
 </template>
 
 <script lang="ts">
-import { Vue } from 'vue-class-component'
+import { Component, Vue } from 'vue-property-decorator'
+
+@Component
 export default class Gallery extends Vue {
   array = ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg']
 }

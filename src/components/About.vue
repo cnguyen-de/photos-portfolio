@@ -1,5 +1,5 @@
 <template>
-  <div class="text-3xl pt-20 p-4 md:pl-40 text-white flex justify-center">
+  <div class="text-3xl pt-20 md:pt-4 p-4 pl-4 md:pl-48 text-white flex justify-center text-justify">
     {{ $t('intro.greet') }}
   </div>
 </template>

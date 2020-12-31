@@ -3,7 +3,7 @@
     <div class="language">
       <select
         v-model="$i18n.locale"
-        class="language__options block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-1 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+        class="language__options block appearance-none w-full bg-transparent border border-gray-400 text-gray-100 py-1 px-4 rounded leading-tight focus:outline-none focus:bg-transparent focus:border-gray-200"
       >
         <option value="en">󠁧󠁢󠁥󠁮󠁧🇬🇧English</option>
         <option value="de">🇩🇪Deutsch</option>

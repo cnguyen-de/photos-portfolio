@@ -52,11 +52,7 @@
 
       <div class="logo text-2xl text-white italic">Bich Bui</div>
     </div>
-    <div
-      class="z-40 h-screen w-screen absolute bg-transparent"
-      @click="toggleNavbar()"
-      v-show="isNavbarDisplayed"
-    ></div>
+    <div class="z-40 h-screen w-screen fixed bg-transparent" @click="toggleNavbar()" v-show="isNavbarDisplayed"></div>
   </div>
 </template>
 

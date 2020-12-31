@@ -1,6 +1,6 @@
 <template>
-  <div class="text-3xl pl-40 text-white">
-    About
+  <div class="text-3xl pt-20 p-4 md:pl-40 text-white flex justify-center">
+    {{ $t('intro.greet') }}
   </div>
 </template>
 

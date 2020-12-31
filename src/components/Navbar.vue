@@ -9,19 +9,21 @@
       </router-link>
 
       <router-link to="/gallery" class="p-2">
-        <span class="text-2xl text-white" @click="toggleNavbar()">Gallery</span>
+        <span class="text-2xl text-white" @click="toggleNavbar()">{{ $t('nav.gallery') }}</span>
       </router-link>
 
       <router-link to="/albums" class="p-2">
-        <span class="text-2xl text-white" @click="toggleNavbar()">Albums</span>
+        <span class="text-2xl text-white" @click="toggleNavbar()">{{ $t('nav.album') }}</span>
       </router-link>
 
       <router-link to="/about" class="p-2">
-        <span class="text-2xl text-white" @click="toggleNavbar()">About</span>
+        <span class="text-2xl text-white" @click="toggleNavbar()">{{ $t('nav.about') }}</span>
       </router-link>
+
+      <LanguageSwitcher />
     </div>
     <div
-      class="md:hidden block fixed left-0 bg-opacity-50 z-50 bg-gradient-to-b from-transBlack to-transparent w-screen"
+      class="md:hidden flex fixed left-0 bg-opacity-50 z-50 bg-gradient-to-b from-transBlack to-transparent w-screen"
     >
       <button class="nav__toggle w-16 h-16 text-white" @click="toggleNavbar()">
         <svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" class="ml-5 w-5 h-5">
@@ -33,14 +35,22 @@
           ></path>
         </svg>
       </button>
+      <span class="flex-grow"></span>
+      <div class="w-28 mt-5 mr-2">
+        <!--         <LanguageSwitcher />
+ -->
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
+import LanguageSwitcher from './LanguageSwitcher.vue'
 
-@Component
+@Component({
+  components: { LanguageSwitcher }
+})
 export default class Navbar extends Vue {
   isNavbarDisplayed = false
   toggleNavbar() {

@@ -1,5 +1,5 @@
 <template>
-  <div class="text-3xl pl-40 text-white">
+  <div class="text-3xl pl-40 text-white grid items-center text-center">
     Albums
   </div>
 </template>

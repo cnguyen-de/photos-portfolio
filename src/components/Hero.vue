@@ -1,7 +1,7 @@
 <template>
   <div class="hero">
-    <div ref="bgImage" class="hero__bg-image h-screen w-screen">
-      <img class="absolute object-cover h-full w-full" src="1.jpg" />
+    <div class="hero__image-wrapper h-screen w-screen">
+      <img id="hero__image" class="hero__image absolute object-cover h-full w-full" :src="imageSource" />
       <!-- 
       <div
         class="hero__overlay bg-opacity-50 bg-black absolute z-10 h-screen w-screen grid items-center justify-center"
@@ -29,23 +29,23 @@ import Navbar from './Navbar.vue'
 })
 export default class Hero extends Vue {
   array = ['1', '2', '3', '4']
+  imageSource = this.array[0] + '.jpg'
   mounted() {
-    /* let count = 1
-    const bgImageElement = document.querySelector('.hero__bg-image')
+    let count = 1
     setInterval(() => {
       count++
       if (count >= this.array.length) {
         count = 1
       }
-      bgImageElement?.setAttribute('style', 'background-image: url("' + count + '.jpg");')
-    }, 5000) */
+      this.imageSource = count + '.jpg'
+    }, 5000)
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.hero__bg-image {
-  transition: background-image 1s ease-in-out 1s;
+.hero__image {
+  transition: 1s ease-in-out 1s;
 }
 </style>

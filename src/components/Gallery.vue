@@ -2,16 +2,21 @@
   <div class="text-3xl pt-20 md:pt-4 p-4 pl-4 md:pl-48 text-white flex justify-center">
     <div class="container">
       <figure v-for="image of array" :key="image">
-        <img class="rounded-lg" :src="image" @contextmenu.prevent="" alt="" @click="displayFullscreenImage(image)" />
+        <img
+          class="rounded-lg cursor-pointer"
+          :src="image"
+          @contextmenu.prevent=""
+          alt=""
+          @click="displayFullscreenImage(image)"
+        />
         <figcaption><a href="#"></a></figcaption>
       </figure>
     </div>
     <div
       class="preview fixed z-50 left-0 w-full h-full bg-black bg-opacity-90 flex justify-center"
-      @click="togglePreview()"
       v-if="isDisplayingFullscreenImage"
     >
-      <img :src="selectedImage" alt="" class="absolute h-full w-full object-contain" style="z-index: 999;" />
+      <img :src="selectedImage" alt="" class="absolute h-full w-full object-contain" />
       <button
         class="nav__toggle absolute mr-4 mt-4 right-0 w-12 h-12 text-white outline-none focus:outline-none hover:bg-gray-700 rounded flex items-center justify-center"
         @click="togglePreview()"

@@ -1,13 +1,13 @@
 <template>
   <div class="">
     <div
-      class="nav fixed left-0 text-white bg-opacity-50 z-50 bg-gradient-to-r from-transBlack to-transparent min-h-screen w-52 md:flex flex-col justify-between items-center"
-      :class="{ 'hidden w-0': !isNavbarDisplayed, 'flex w-52': isNavbarDisplayed }"
+      class="nav nav--desktop fixed left-0 md:visible md:opacity-100 text-white bg-opacity-50 z-50 flex bg-gradient-to-r from-transBlack to-transparent min-h-screen md:w-52 md:flex flex-col justify-between items-center"
+      :class="{ 'invisible w-20 opacity-0': !isNavbarDisplayed, 'visible w-52 opacity-100': isNavbarDisplayed }"
     >
       <div class=" logo text-2xl text-white pt-10 lg:pt-24">
         <span class="hidden md:block">
           <router-link to="/" class="p-2">
-            <span class="text-base lg:text-2xl text-white" @click="toggleNavbar()">Bich Bui</span>
+            <span class="text-base lg:text-2xl text-white">Bich Bui</span>
           </router-link>
         </span>
       </div>
@@ -29,7 +29,7 @@
       <LanguageSwitcher class="w-full px-16 pb-10 lg:pb-20" />
     </div>
     <div
-      class="md:hidden flex fixed h-16 left-0 bg-opacity-50 z-50 bg-gradient-to-b from-transBlack to-transparent w-screen items-center justify-center"
+      class="nav--mobile md:hidden flex fixed h-16 left-0 bg-opacity-50 z-50 bg-gradient-to-b from-transBlack to-transparent w-screen items-center justify-center"
     >
       <button
         class="nav__toggle absolute left-0 w-16 h-16 text-white outline-none focus:outline-none"
@@ -40,21 +40,26 @@
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           class="ml-5 w-5 h-5"
-          v-if="!isNavbarDisplayed"
+          v-show="!isNavbarDisplayed"
         >
-          <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
-            d="M15 2H0V1h15v1zm0 4H0V5h15v1zm0 4H0V9h15v1zm0 4H0v-1h15v1z"
-            fill="currentColor"
-          ></path>
+          <path d="M0 3.5h15m-15 8h15m-15-4h15" stroke="currentColor"></path>
         </svg>
-        <svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" class="ml-5 w-5 h-5" v-else>
+        <svg
+          viewBox="0 0 15 15"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          class="ml-5 w-5 h-5"
+          v-show="isNavbarDisplayed"
+        >
           <path d="M1.5 1.5l12 12m-12 0l12-12" stroke="currentColor"></path>
         </svg>
       </button>
 
-      <div class="logo text-2xl text-white italic">Bich Bui</div>
+      <div class="logo text-xl text-white">
+        <router-link to="/" class="p-2">
+          <span @click="toggleNavbar(false)">Bich Bui</span>
+        </router-link>
+      </div>
     </div>
     <div class="z-40 h-screen w-screen fixed bg-transparent" @click="toggleNavbar()" v-show="isNavbarDisplayed"></div>
   </div>
@@ -69,15 +74,22 @@ import LanguageSwitcher from './LanguageSwitcher.vue'
 })
 export default class Navbar extends Vue {
   isNavbarDisplayed = false
-  toggleNavbar() {
-    this.isNavbarDisplayed = !this.isNavbarDisplayed
+  toggleNavbar(state?: boolean) {
+    if (typeof state !== 'undefined') {
+      this.isNavbarDisplayed = state
+    } else {
+      this.isNavbarDisplayed = !this.isNavbarDisplayed
+    }
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-.nav {
-  transition: all 0.5 ease-in-out;
+.nav,
+svg {
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  transition: all 0.5s ease;
 }
 </style>

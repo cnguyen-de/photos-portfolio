@@ -22,7 +22,7 @@
           <span class="text-2xl text-white" @click="toggleNavbar()">{{ $t('nav.about') }}</span>
         </router-link>
       </div>
-      <LanguageSwitcher class="pb-10" />
+      <LanguageSwitcher class="pb-20" />
     </div>
     <div
       class="md:hidden flex fixed h-16 left-0 bg-opacity-50 z-50 bg-gradient-to-b from-transBlack to-transparent w-screen items-center justify-center"

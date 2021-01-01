@@ -7,23 +7,28 @@ Vue.use(VueRouter)
 export const routes = [
   {
     path: '/',
-    name: 'Home',
+    name: 'home',
     component: Hero
   },
   {
     path: '/about',
-    name: 'About',
-    component: () => import('@/components/About.vue')
+    name: 'about',
+    component: () => import('@/pages/About.vue')
   },
   {
     path: '/gallery',
     name: 'gallery',
-    component: () => import('@/components/Gallery.vue')
+    component: () => import('@/pages/Gallery.vue')
   },
   {
     path: '/albums',
     name: 'albums',
-    component: () => import('@/components/Albums.vue')
+    component: () => import('@/pages/Albums.vue')
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('@/pages/Login.vue')
   }
 ]
 

@@ -37,17 +37,19 @@
 import { Component, Vue } from 'vue-property-decorator'
 import { vxm } from '../store/store.vuex'
 import { USER_LOGIN, USER_LOGOUT } from '../store/actions'
+import firebase from 'firebase/app'
+import 'firebase/auth'
 
 @Component
 export default class Login extends Vue {
-  async login() {
-    await vxm.user[USER_LOGIN]()
+  login() {
+    this.$store.dispatch(USER_LOGIN)
   }
   async logout() {
-    await vxm.user[USER_LOGOUT]()
+    this.$store.dispatch(USER_LOGOUT)
   }
   mounted() {
-    console.log('muh')
+    console.log(this.user)
   }
 
   get user() {

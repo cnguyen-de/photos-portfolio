@@ -1,5 +1,5 @@
-import { createModule, action } from 'vuex-class-component'
-import { USER_LOGIN, USER_LOGOUT } from '../actions'
+import { createModule, action, mutation } from 'vuex-class-component'
+import { USER_LOGIN, USER_LOGOUT, USER_SET } from '../actions'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 
@@ -8,7 +8,11 @@ const VuexModule = createModule({
 })
 
 export class UserStore extends VuexModule {
-  username: string | null | undefined = null
+  username: firebase.User | null = null;
+
+  @mutation [USER_SET](user: firebase.User | null) {
+    this.username = user
+  }
 
   @action async [USER_LOGIN]() {
     const provider = new firebase.auth.GoogleAuthProvider()
@@ -22,7 +26,7 @@ export class UserStore extends VuexModule {
 
         // The signed-in user info.
         const user = result.user
-        this.username = user?.displayName
+        this[USER_SET](user)
         // ...
       })
       .catch(error => {
@@ -44,7 +48,8 @@ export class UserStore extends VuexModule {
       .auth()
       .signOut()
       .then(() => {
-        this.username = ''
+        this[USER_SET](null)
+        console.log('logged out')
       })
       .catch(error => {
         console.log(error)
@@ -52,8 +57,6 @@ export class UserStore extends VuexModule {
   }
 
   get getUser() {
-    const user = firebase.auth().currentUser
-    console.log(user)
-    return user
+    return this.username
   }
 }

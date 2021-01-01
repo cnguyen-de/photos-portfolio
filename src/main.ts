@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import i18n from './i18n'
+import { store } from './store/store.vuex'
 
 import firebase from 'firebase/app'
 import 'firebase/firestore'
@@ -29,5 +30,6 @@ Vue.prototype.$auth = firebase.auth()
 new Vue({
   render: h => h(App),
   i18n,
+  store,
   router
 }).$mount('#app')

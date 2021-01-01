@@ -40,7 +40,15 @@ export class UserStore extends VuexModule {
   }
 
   @action async [USER_LOGOUT]() {
-    firebase.auth().signOut()
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        this.username = ''
+      })
+      .catch(error => {
+        console.log(error)
+      })
   }
 
   get getUser() {

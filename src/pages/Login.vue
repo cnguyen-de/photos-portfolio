@@ -22,6 +22,7 @@
           <div class="login__actions">
             <button
               class="h-12 px-10 mb-4 rounded-full bg-gray-700 focus:outline-none focus:bg-gray-900 hover:bg-gray-300 focus:border-blue-500 appearance-none outline-none border-2 border-gray-800 text-gray-300 hover:text-gray-700"
+              @click="logout()"
             >
               Logout
             </button>
@@ -35,12 +36,15 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import { vxm } from '../store/store.vuex'
-import { USER_LOGIN } from '../store/actions'
+import { USER_LOGIN, USER_LOGOUT } from '../store/actions'
 
 @Component
 export default class Login extends Vue {
   async login() {
     await vxm.user[USER_LOGIN]()
+  }
+  async logout() {
+    await vxm.user[USER_LOGOUT]()
   }
   mounted() {
     console.log('muh')

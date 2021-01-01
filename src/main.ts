@@ -12,7 +12,7 @@ Vue.config.productionTip = false
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAq-TyAZb7OS_NVETKkKeVE9VCD_PmV2_Q',
-  authDomain: 'photos-portfolio-300318.firebaseapp.com',
+  authDomain: 'auth.bichbui.com',
   projectId: 'photos-portfolio-300318',
   storageBucket: 'photos-portfolio-300318.appspot.com',
   messagingSenderId: '1015819770341',

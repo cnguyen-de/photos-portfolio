@@ -1,6 +1,6 @@
 <template>
   <div class="text-3xl pt-20 md:pt-4 p-4 pl-4 md:pl-48 text-white flex justify-center">
-    Albums
+    {{ $t('nav.album') }}. {{ $t('placeholder') }}
   </div>
 </template>
 

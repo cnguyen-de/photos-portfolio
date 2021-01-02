@@ -35,16 +35,19 @@ import { Component, Vue } from 'vue-property-decorator'
 
 @Component
 export default class Gallery extends Vue {
-  array = ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg']
+  array = ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg', '8.jpg']
   isDisplayingFullscreenImage = false
   selectedImage = ''
+  body = document.querySelector('body')
   displayFullscreenImage(image: string) {
     this.selectedImage = image
     this.isDisplayingFullscreenImage = true
+    if (this.body) this.body.style.overflow = 'hidden'
   }
   togglePreview() {
     this.selectedImage = ''
     this.isDisplayingFullscreenImage = false
+    if (this.body) this.body.style.overflow = 'auto'
   }
 }
 </script>

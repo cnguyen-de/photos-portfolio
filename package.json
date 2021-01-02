@@ -1,9 +1,11 @@
 {
   "name": "bichbui.com",
-  "version": "0.1.0",
+  "version": "1.0.0-alpha",
   "private": true,
+  "author": "Chi Nguyen @ cnguyen.de",
+  "description": "Photos Portfolio for Bich Bui",
   "scripts": {
-    "serve": "vue-cli-service serve --host localhost --port 3000",
+    "serve": "vue-cli-service serve --host 0.0.0.0 --port 3000",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",

@@ -1,6 +1,6 @@
 <template>
   <div class="hero">
-    <div class="hero__image-wrapper min-h-screen min-w-screen">
+    <div class="hero__image-wrapper min-h-screen min-w-screen" style="min-height: -webkit-fill-available;">
       <img id="hero__image" class="hero__image absolute object-cover h-full w-full" :src="imageSource" />
       <!-- 
       <div

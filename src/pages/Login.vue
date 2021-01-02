@@ -1,7 +1,7 @@
 <template>
   <div class="pt-20 md:pt-4 p-4 pl-4 md:pl-48 h-screen w-full">
     <div class="login h-full w-full flex justify-center items-center">
-      <div class="w-full min-h-1/2 lg:w-1/2 bg-gray-800 flex justify-center items-center rounded-lg">
+      <div class="w-full h-2/3 lg:h-1/2 lg:w-1/2 bg-gray-800 flex justify-center items-center rounded-lg">
         <div class="login--no-user" v-if="!user">
           <div class="text-2xl text-gray-100">You're not logged in</div>
           <button
@@ -37,19 +37,15 @@
 import { Component, Vue } from 'vue-property-decorator'
 import { vxm } from '../store/store.vuex'
 import { USER_LOGIN, USER_LOGOUT } from '../store/actions'
-import firebase from 'firebase/app'
-import 'firebase/auth'
 
 @Component
 export default class Login extends Vue {
   login() {
     this.$store.dispatch(USER_LOGIN)
   }
-  async logout() {
+
+  logout() {
     this.$store.dispatch(USER_LOGOUT)
-  }
-  mounted() {
-    console.log(this.user)
   }
 
   get user() {

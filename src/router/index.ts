@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Hero from '@/components/Hero.vue'
-import { store, vxm } from '../store/store.vuex'
+import { getUser } from '../services/auth'
 
 Vue.use(VueRouter)
 
@@ -34,7 +34,10 @@ export const routes = [
   {
     path: '/photos-manager',
     name: 'photos-manager',
-    component: () => import('@/pages/PhotosManager.vue')
+    component: () => import('@/pages/PhotosManager.vue'),
+    meta: {
+      requiresAuth: true
+    }
   }
 ]
 
@@ -44,11 +47,12 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  /* if (vxm.user.getUserFromFirebase()) {
-    next()
+  const currentUser = getUser()
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
+  if (requiresAuth && !currentUser) {
+    next('/login')
   } else {
-    next('/')
-  } */
-  next()
+    next()
+  }
 })
 export default router

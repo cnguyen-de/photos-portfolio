@@ -20,13 +20,14 @@
             {{ user.displayName }}
           </div>
           <div class="login__actions">
-            <button
-              class="h-12 px-10 mb-4 rounded-full bg-gray-700 focus:outline-none focus:bg-gray-900 hover:bg-gray-300 focus:border-blue-500 appearance-none outline-none border-2 border-gray-800 text-gray-300 hover:text-gray-700"
-            >
-              <router-link to="/photos-manager">
+            <router-link to="/photos-manager">
+              <button
+                class="h-12 px-10 mb-4 rounded-full bg-gray-700 focus:outline-none hover:bg-gray-300 appearance-none outline-none border-2 border-gray-800 text-gray-300 hover:text-gray-700"
+              >
                 Photos Manager
-              </router-link>
-            </button>
+              </button>
+            </router-link>
+
             <button
               class="h-12 px-10 mb-4 rounded-full bg-red-500 focus:outline-none hover:bg-red-600 appearance-none outline-none text-gray-300 hover:text-gray-200"
               @click="logout()"

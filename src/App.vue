@@ -19,15 +19,7 @@ import { USER_SET } from './store/actions'
     Navbar
   }
 })
-export default class App extends Vue {
-  mounted() {
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        this.$store.commit(USER_SET, user)
-      }
-    })
-  }
-}
+export default class App extends Vue {}
 </script>
 
 <style>

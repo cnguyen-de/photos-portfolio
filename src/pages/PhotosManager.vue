@@ -7,23 +7,8 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import { store } from '../store/store.vuex'
-import firebase from 'firebase/app'
-import 'firebase/auth'
-import { USER_SET } from '../store/actions'
 
-@Component({
-  beforeRouteEnter(to, from, next) {
-    const unsubscribe = firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        store.commit(USER_SET, user)
-        next()
-      } else {
-        next('/login')
-      }
-    })
-    unsubscribe()
-  }
-})
+@Component
 export default class PhotosManager extends Vue {
   mounted() {
     console.log('mounted')

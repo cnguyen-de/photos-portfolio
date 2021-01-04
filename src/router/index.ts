@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Hero from '@/components/Hero.vue'
-import { getUser } from '../services/auth'
+import { getUser } from '../services/firebase'
+import { store } from '../store/store.vuex'
 
 Vue.use(VueRouter)
 
@@ -46,13 +47,20 @@ const router = new VueRouter({
   mode: 'history'
 })
 
+const storeInit = store.dispatch('initApp')
 router.beforeEach((to, from, next) => {
-  const currentUser = getUser()
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
-  if (requiresAuth && !currentUser) {
-    next('/login')
-  } else {
+  if (!requiresAuth) {
     next()
+  } else {
+    storeInit.then(() => {
+      const currentUser = getUser()
+      if (!currentUser) {
+        next('/login')
+      } else {
+        next()
+      }
+    })
   }
 })
 export default router

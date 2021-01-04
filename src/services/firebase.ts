@@ -1,8 +1,6 @@
 import { store } from '../store/store.vuex'
 import { USER_SET } from '@/store/actions'
 
-import router from '../router'
-
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
@@ -26,14 +24,5 @@ firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
 export function getUser() {
   return firebase.auth().currentUser
 }
-
-firebase.auth().onAuthStateChanged(user => {
-  store.commit(USER_SET, user)
-  console.log('firebase auth change')
-  store.commit('setAppInitialized')
-  if (!user) {
-    router.push('/login')
-  }
-})
 
 export default { getUser }

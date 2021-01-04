@@ -24,6 +24,8 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig)
 firebase.analytics()
 firebase.auth()
+firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+
 Vue.prototype.$analytics = firebase.analytics()
 Vue.prototype.$auth = firebase.auth()
 

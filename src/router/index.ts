@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Hero from '@/components/Hero.vue'
+import { store, vxm } from '../store/store.vuex'
 
 Vue.use(VueRouter)
 
@@ -29,6 +30,11 @@ export const routes = [
     path: '/login',
     name: 'login',
     component: () => import('@/pages/Login.vue')
+  },
+  {
+    path: '/photos-manager',
+    name: 'photos-manager',
+    component: () => import('@/pages/PhotosManager.vue')
   }
 ]
 
@@ -37,4 +43,12 @@ const router = new VueRouter({
   mode: 'history'
 })
 
+router.beforeEach((to, from, next) => {
+  /* if (vxm.user.getUserFromFirebase()) {
+    next()
+  } else {
+    next('/')
+  } */
+  next()
+})
 export default router

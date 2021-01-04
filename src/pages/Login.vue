@@ -13,8 +13,8 @@
           {{ user }}
         </div>
         <div class="login--has-user text-xl text-white text-center flex flex-col p-8" v-else>
-          <div class="login__user-info flex flex-col md:flex-row p-4">
-            <div class="h-24 w-24 pb-2">
+          <div class="login__user-info flex flex-col md:flex-row p-4 justify-center items-center">
+            <div class="h-24 w-24 m-4">
               <img :src="user.photoURL" alt="" class="absoulte rounded-full h-full w-full object-cover" />
             </div>
             {{ user.displayName }}
@@ -22,6 +22,13 @@
           <div class="login__actions">
             <button
               class="h-12 px-10 mb-4 rounded-full bg-gray-700 focus:outline-none focus:bg-gray-900 hover:bg-gray-300 focus:border-blue-500 appearance-none outline-none border-2 border-gray-800 text-gray-300 hover:text-gray-700"
+            >
+              <router-link to="/photos-manager">
+                Photos Manager
+              </router-link>
+            </button>
+            <button
+              class="h-12 px-10 mb-4 rounded-full bg-red-500 focus:outline-none hover:bg-red-600 appearance-none outline-none text-gray-300 hover:text-gray-200"
               @click="logout()"
             >
               Logout

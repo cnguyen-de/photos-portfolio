@@ -18,7 +18,6 @@ export class AppStore extends VuexModule {
   @action async initApp() {
     return new Promise(resolve => {
       firebase.auth().onAuthStateChanged(user => {
-        console.log('init app')
         store.commit(USER_SET, user)
         store.commit('setAppInitialized')
         resolve('done')

@@ -1,6 +1,5 @@
 import { createModule, action, mutation } from 'vuex-class-component'
 import { USER_LOGIN, USER_LOGOUT, USER_SET } from '../actions'
-import { loginWithGoogle } from '../../services/firebase'
 
 import firebase from 'firebase/app'
 import 'firebase/auth'
@@ -21,7 +20,7 @@ export class UserStore extends VuexModule {
   @action async initApp() {
     return new Promise(resolve => {
       firebase.auth().onAuthStateChanged(user => {
-        this.setUser(user)
+        this[USER_SET](user)
         this.setAppInitialized()
         resolve('done')
       })
@@ -32,13 +31,40 @@ export class UserStore extends VuexModule {
     return this.initialized
   }
 
-  @mutation setUser(user: firebase.User | null) {
+  @mutation [USER_SET](user: firebase.User | null) {
     this.username = user
     console.log('set user', user)
   }
 
   @action async [USER_LOGIN]() {
-    loginWithGoogle()
+    const provider = new firebase.auth.GoogleAuthProvider()
+    console.log(provider)
+    firebase.auth().languageCode = 'en' //TODO change to selected language
+    firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then(result => {
+        /** @type {firebase.auth.OAuthCredential} */
+        const credential = result.credential
+
+        // The signed-in user info.
+        const user = result.user
+        this[USER_SET](user)
+        console.log('user', user?.displayName)
+        // ...
+      })
+      .catch(error => {
+        // Handle Errors here.
+        const errorCode = error.code
+        const errorMessage = error.message
+        // The email of the user's account used.
+        const email = error.email
+        // The firebase.auth.AuthCredential type that was used.
+        const credential = error.credential
+        console.log(errorCode, errorMessage, email, credential)
+
+        // ...
+      })
   }
 
   @action async [USER_LOGOUT]() {
@@ -46,7 +72,7 @@ export class UserStore extends VuexModule {
       .auth()
       .signOut()
       .then(() => {
-        this.setUser(null)
+        this[USER_SET](null)
         console.log('logged out')
       })
       .catch(error => {

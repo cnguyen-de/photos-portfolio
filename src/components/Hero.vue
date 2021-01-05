@@ -18,7 +18,7 @@ import Navbar from './Navbar.vue'
   }
 })
 export default class Hero extends Vue {
-  array = ['1.jpg', '2.jpg', '3.jpg', '4.jpg']
+  array = ['a.jpg', 'b.jpg', 'c.jpg', 'd.jpg']
   stories: HTMLElement | null = null
   arrayStory: NodeListOf<HTMLElement> = document.querySelectorAll('.story')
   index = 0

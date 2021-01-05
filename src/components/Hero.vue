@@ -1,19 +1,9 @@
 <template>
-  <div class="hero">
-    <div class="hero__image-wrapper min-h-screen min-w-screen" style="min-height: -webkit-fill-available;">
-      <img id="hero__image" class="hero__image absolute object-cover h-full w-full" :src="imageSource" />
-      <!-- 
-      <div
-        class="hero__overlay bg-opacity-50 bg-black absolute z-10 h-screen w-screen grid items-center justify-center"
-      >
-      
-        <div class="hero__text text-center text-gray-100">
-          <p class="hero__title text-4xl md:text-6xl pb-4">A Photography Portfolio</p>
-          <p class="hero__subtitle text-2xl md:text-3xl italic">Bich Bui</p>
-        </div>
-
-      </div>
-       -->
+  <div class="hero min-h-screen h-screen min-w-screen grid place-items-center">
+    <div class="stories">
+      <section class="user" v-for="img of array" :key="img" ref="img" @click="click($event)">
+        <article class="story" :style="'background-image: url(' + img + ');'"></article>
+      </section>
     </div>
   </div>
 </template>
@@ -28,24 +18,94 @@ import Navbar from './Navbar.vue'
   }
 })
 export default class Hero extends Vue {
-  array = ['1', '2', '3', '4']
-  imageSource = this.array[0] + '.jpg'
+  array = ['1.jpg', '2.jpg', '3.jpg', '4.jpg']
+  stories: HTMLElement | null = null
+  arrayStory: NodeListOf<HTMLElement> = document.querySelectorAll('.story')
+  index = 0
+
   mounted() {
-    let count = 1
+    this.stories = this.$el.querySelector('.stories')
+    this.arrayStory = this.$el.querySelectorAll('.story')
     setInterval(() => {
-      count++
-      if (count >= this.array.length) {
-        count = 1
+      this.navigateStories('next')
+    }, 7500)
+  }
+
+  click($event: MouseEvent) {
+    if (this.stories instanceof HTMLElement) {
+      const median = window.innerWidth / 2
+      this.navigateStories($event.clientX > median ? 'next' : 'prev')
+    }
+  }
+  navigateStories(direction: string) {
+    if (direction === 'next') {
+      if (this.index < this.arrayStory.length - 1) {
+        this.index++
+      } else {
+        this.index = 0
       }
-      this.imageSource = count + '.jpg'
-    }, 5000)
+      this.arrayStory[this.index].scrollIntoView({ behavior: 'smooth' })
+    } else if (direction === 'prev') {
+      if (this.index > 0) {
+        this.index--
+      } else {
+        this.index = this.arrayStory.length - 1
+      }
+      this.arrayStory[this.index].scrollIntoView({ behavior: 'smooth' })
+    }
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-.hero__image {
-  transition: 1s ease-in-out 1s;
+<style lang="scss" scoped>
+.hero {
+}
+.stories {
+  position: relative;
+
+  display: grid;
+  grid: 1fr / auto-flow 100%;
+  gap: 1ch;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior: contain;
+  touch-action: pan-x;
+
+  inline-size: 100vw;
+  block-size: 100vh;
+  scrollbar-width: none; /* Firefox */
+}
+::-webkit-scrollbar {
+  /* Chrome & Safari */
+  display: none;
+}
+
+.user {
+  /* outer */
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+
+  /* inner */
+  display: grid;
+  grid: [story] 1fr / [story] 1fr;
+}
+
+.story {
+  grid-area: story;
+
+  background-size: cover;
+  background-position: center;
+  //background-image: var(--bg), linear-gradient(to top, lch(98 0 0), lch(90 0 0));
+
+  user-select: none;
+  touch-action: manipulation;
+
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 1, 1);
+
+  &.seen {
+    opacity: 0;
+    pointer-events: none;
+  }
 }
 </style>

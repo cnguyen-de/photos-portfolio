@@ -39,6 +39,16 @@ export const routes = [
     meta: {
       requiresAuth: true
     }
+  },
+  {
+    path: '/terms-of-service',
+    name: 'tos',
+    component: () => import('@/pages/TOS.vue')
+  },
+  {
+    path: '/privacy-policy',
+    name: 'privacy',
+    component: () => import('@/pages/Privacy.vue')
   }
 ]
 

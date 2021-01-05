@@ -5,7 +5,7 @@
         <div class="login--no-user" v-if="!user">
           <div class="text-2xl text-gray-100">You're not logged in</div>
           <button
-            class="h-12 px-10 mb-4 rounded-full bg-gray-700 focus:outline-none focus:bg-gray-900 hover:bg-gray-300 focus:border-blue-500 appearance-none outline-none border-2 border-gray-800 text-gray-300 hover:text-gray-700"
+            class="h-12 px-10 mb-4 rounded-full bg-gray-700 focus:outline-none hover:bg-gray-300 appearance-none outline-none border-2 border-gray-800 text-gray-300 hover:text-gray-700"
             @click="login()"
           >
             Login with Google

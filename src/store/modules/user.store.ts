@@ -33,12 +33,10 @@ export class UserStore extends VuexModule {
 
   @mutation [USER_SET](user: firebase.User | null) {
     this.username = user
-    console.log('set user', user)
   }
 
   @action async [USER_LOGIN]() {
     const provider = new firebase.auth.GoogleAuthProvider()
-    console.log(provider)
     firebase.auth().languageCode = 'en' //TODO change to selected language
     firebase
       .auth()
@@ -50,7 +48,6 @@ export class UserStore extends VuexModule {
         // The signed-in user info.
         const user = result.user
         this[USER_SET](user)
-        console.log('user', user?.displayName)
         // ...
       })
       .catch(error => {
@@ -73,7 +70,6 @@ export class UserStore extends VuexModule {
       .signOut()
       .then(() => {
         this[USER_SET](null)
-        console.log('logged out')
       })
       .catch(error => {
         console.log(error)

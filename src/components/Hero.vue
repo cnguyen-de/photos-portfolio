@@ -22,21 +22,27 @@ export default class Hero extends Vue {
   stories: HTMLElement | null = null
   arrayStory: NodeListOf<HTMLElement> = document.querySelectorAll('.story')
   index = 0
+  autoScroll = setInterval(() => {
+    this.navigateStories('next')
+  }, 10000)
+
+  scrollListener = document.addEventListener('wheel', e => {
+    clearInterval(this.autoScroll)
+  })
 
   mounted() {
     this.stories = this.$el.querySelector('.stories')
     this.arrayStory = this.$el.querySelectorAll('.story')
-    setInterval(() => {
-      this.navigateStories('next')
-    }, 7500)
   }
 
   click($event: MouseEvent) {
     if (this.stories instanceof HTMLElement) {
+      clearInterval(this.autoScroll)
       const median = window.innerWidth / 2
       this.navigateStories($event.clientX > median ? 'next' : 'prev')
     }
   }
+
   navigateStories(direction: string) {
     if (direction === 'next') {
       if (this.index < this.arrayStory.length - 1) {
@@ -59,8 +65,6 @@ export default class Hero extends Vue {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-.hero {
-}
 .stories {
   position: relative;
 

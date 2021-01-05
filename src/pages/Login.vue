@@ -45,11 +45,13 @@
 import { Component, Vue } from 'vue-property-decorator'
 import { vxm } from '../store/store.vuex'
 import { USER_LOGIN, USER_LOGOUT } from '../store/actions'
+import { loginWithGoogle } from '../services/firebase'
 
 @Component
 export default class Login extends Vue {
   login() {
-    this.$store.dispatch(USER_LOGIN)
+    loginWithGoogle()
+    //this.$store.dispatch(USER_LOGIN)
   }
 
   logout() {

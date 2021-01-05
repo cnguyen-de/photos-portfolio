@@ -33,6 +33,7 @@ export class UserStore extends VuexModule {
 
   @mutation [USER_SET](user: firebase.User | null) {
     this.username = user
+    console.log('set user', user)
   }
 
   @action async [USER_LOGIN]() {

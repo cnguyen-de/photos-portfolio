@@ -38,6 +38,7 @@ export function loginWithGoogle() {
       // The signed-in user info.
       const user = result.user
       store.commit(USER_SET, user)
+      console.log('user', user?.displayName)
       // ...
     })
     .catch(error => {

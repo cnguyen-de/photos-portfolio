@@ -8,7 +8,26 @@ const VuexModule = createModule({
 })
 
 export class UserStore extends VuexModule {
-  username: firebase.User | null = null;
+  username: firebase.User | null = null
+  initialized = false
+
+  @mutation setAppInitialized() {
+    this.initialized = true
+  }
+
+  @action async initApp() {
+    return new Promise(resolve => {
+      firebase.auth().onAuthStateChanged(user => {
+        this[USER_SET](user)
+        this.setAppInitialized()
+        resolve('done')
+      })
+    })
+  }
+
+  get isAppInitialized() {
+    return this.initialized
+  }
 
   @mutation [USER_SET](user: firebase.User | null) {
     this.username = user
@@ -16,6 +35,7 @@ export class UserStore extends VuexModule {
 
   @action async [USER_LOGIN]() {
     const provider = new firebase.auth.GoogleAuthProvider()
+    console.log(provider)
     firebase.auth().languageCode = 'en' //TODO change to selected language
     firebase
       .auth()

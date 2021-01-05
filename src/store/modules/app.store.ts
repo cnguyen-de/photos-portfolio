@@ -8,24 +8,4 @@ const VuexModule = createModule({
   strict: false
 })
 
-export class AppStore extends VuexModule {
-  initialized = false
-
-  @mutation setAppInitialized() {
-    this.initialized = true
-  }
-
-  @action async initApp() {
-    return new Promise(resolve => {
-      firebase.auth().onAuthStateChanged(user => {
-        store.commit(USER_SET, user)
-        store.commit('setAppInitialized')
-        resolve('done')
-      })
-    })
-  }
-
-  get isAppInitialized() {
-    return this.initialized
-  }
-}
+export class AppStore extends VuexModule {}

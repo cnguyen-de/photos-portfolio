@@ -6,7 +6,8 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 
 const VuexModule = createModule({
-  strict: false
+  strict: false,
+  namespaced: 'user'
 })
 
 export class UserStore extends VuexModule {
@@ -20,7 +21,7 @@ export class UserStore extends VuexModule {
   @action async initApp() {
     return new Promise(resolve => {
       firebase.auth().onAuthStateChanged(user => {
-        this[USER_SET](user)
+        this.setUser(user)
         this.setAppInitialized()
         resolve('done')
       })
@@ -31,7 +32,7 @@ export class UserStore extends VuexModule {
     return this.initialized
   }
 
-  @mutation [USER_SET](user: firebase.User | null) {
+  @mutation setUser(user: firebase.User | null) {
     this.username = user
     console.log('set user', user)
   }
@@ -45,7 +46,7 @@ export class UserStore extends VuexModule {
       .auth()
       .signOut()
       .then(() => {
-        this[USER_SET](null)
+        this.setUser(null)
         console.log('logged out')
       })
       .catch(error => {

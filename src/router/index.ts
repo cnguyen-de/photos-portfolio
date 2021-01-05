@@ -47,7 +47,7 @@ const router = new VueRouter({
   mode: 'history'
 })
 
-const storeInit = store.dispatch('initApp')
+const storeInit = store.dispatch('user/initApp')
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
   if (!requiresAuth) {

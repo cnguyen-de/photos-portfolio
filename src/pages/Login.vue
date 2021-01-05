@@ -55,7 +55,7 @@ export default class Login extends Vue {
   }
 
   logout() {
-    this.$store.dispatch(USER_LOGOUT)
+    this.$store.dispatch('user/' + USER_LOGOUT)
   }
 
   get user() {

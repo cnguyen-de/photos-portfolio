@@ -49,11 +49,11 @@ import { USER_LOGIN, USER_LOGOUT } from '../store/actions'
 @Component
 export default class Login extends Vue {
   login() {
-    this.$store.dispatch(USER_LOGIN)
+    this.$store.dispatch('user/' + USER_LOGIN)
   }
 
   logout() {
-    this.$store.dispatch(USER_LOGOUT)
+    this.$store.dispatch('user/' + USER_LOGOUT)
   }
 
   get user() {

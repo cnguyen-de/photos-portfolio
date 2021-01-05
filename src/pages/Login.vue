@@ -49,9 +49,9 @@ import { loginWithGoogle } from '../services/firebase'
 
 @Component
 export default class Login extends Vue {
-  login() {
-    loginWithGoogle()
-    //this.$store.dispatch(USER_LOGIN)
+  async login() {
+    //loginWithGoogle()
+    await this.$store.dispatch(USER_LOGIN)
   }
 
   logout() {

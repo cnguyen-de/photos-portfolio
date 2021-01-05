@@ -19,7 +19,6 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig)
 firebase.analytics()
 firebase.auth()
-firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
 
 export function getUser() {
   return firebase.auth().currentUser

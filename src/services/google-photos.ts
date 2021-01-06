@@ -13,20 +13,21 @@ export class GooglePhotos {
   }
 
   getAlbum(albumId: string) {
-    return this.handle<Album | null>(function(client) {
+    return this.handle<Album | null>(client => {
       /** eslint-disable-next-line */
-      return client.albums.get({ albumId }).then((response: any) => response.result)
+      return client.albums.get({ albumId }).then(response => response.result)
     }, null)
   }
 
   listAlbums() {
     return this.handle<Album[]>(client => {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       return client.albums.list({}).then(response => response.result.albums!)
     }, [])
   }
 
   searchMediaItems(albumId: string, pageToken?: string) {
-    return this.handle<SearchMediaItemsResponse>(function(client) {
+    return this.handle<SearchMediaItemsResponse>(function (client) {
       return client.mediaItems
         .search({
           resource: {
@@ -47,7 +48,8 @@ export class GooglePhotos {
    */
   private handle<T>(callback: (client: typeof gapi.client.photoslibrary) => PromiseLike<T>, defaultResponse?: T) {
     return this.gapi.getGapiClient().then(gapi => {
-      return this.gapi.isSignedIn().then(function(isSignedIn) {
+      return this.gapi.isSignedIn().then(function (isSignedIn) {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         return isSignedIn ? callback(gapi.client.photoslibrary) : defaultResponse!
       })
     })

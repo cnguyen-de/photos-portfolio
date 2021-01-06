@@ -4,7 +4,8 @@
   >
     <span class="pb-4">Photos Manager</span>
     <GooglePhotosAuth v-if="!isSignedIn" />
-    <AlbumsManager v-else />
+    <SyncOptions v-if="isSignedIn" />
+    <AlbumsManager v-if="isSignedIn" />
   </div>
 </template>
 
@@ -12,10 +13,11 @@
 import { Component, Vue } from 'vue-property-decorator'
 import GooglePhotosAuth from '../components/GooglePhotosAuth.vue'
 import AlbumsManager from '../components/AlbumsManager.vue'
+import SyncOptions from '../components/SyncOptions.vue'
 
 import { vxm } from '@/store/store.vuex'
 @Component({
-  components: { GooglePhotosAuth, AlbumsManager }
+  components: { GooglePhotosAuth, AlbumsManager, SyncOptions }
 })
 export default class PhotosManager extends Vue {
   isInit = false

@@ -64,18 +64,6 @@ export default class LanguageSwitcher extends Vue {
         }
       }
     }
-    /* 
-    const browserLanguagePropertyKeys = ['language', 'browserLanguage', 'systemLanguage', 'userLanguage']
-    // support for other well known properties in browsers
-    for (i = 0; i < browserLanguagePropertyKeys.length; i++) {
-      // eslint-disable-next-line no-undef
-      console.log(browserLanguagePropertyKeys)
-      language = nav[browserLanguagePropertyKeys[i]]
-      if (language && language.length) {
-        return language
-      }
-    } */
-
     return null
   }
 

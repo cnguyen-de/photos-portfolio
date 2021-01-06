@@ -2,15 +2,21 @@
   <div class="h-full w-full flex flex-row flex-wrap">
     <div v-for="album of albums" :key="album.id">
       <div
-        class="album relative h-40 w-40 m-2 cursor-pointer rounded"
+        class="album relative h-40 w-40 m-2 cursor-pointer rounded-md flex items-center justify-center bg-gray-800"
         @click="selectAlbum(album)"
-        :class="{ 'selected border-4 border-blue-400': selected.includes(album) }"
+        :class="{ ' border-4 border-blue-400': isAlbumSelected(album) }"
       >
-        <img :src="album.coverPhotoBaseUrl" alt="" class="absolute h-full object-cover rounded" />
+        <Check class="absolute left-0 top-0 mt-1 ml-1 z-50" v-if="isAlbumSelected(album)" />
+        <img
+          :src="album.coverPhotoBaseUrl"
+          alt=""
+          class="absolute h-full object-cover rounded-md"
+          :class="{ selected: isAlbumSelected(album) }"
+        />
       </div>
-      <div class="album-info text-sm text-center">
-        <p class="">{{ album.title }}</p>
-        <p class="text-sm">{{ album.mediaItemsCount }} {{ $tc('album.photo', album.mediaItemsCount) }}</p>
+      <div class="album-info text-sm text-center" :class="{ 'text-blue-400 font-bold': isAlbumSelected(album) }">
+        <p>{{ album.title }}</p>
+        <p>{{ album.mediaItemsCount }} {{ $tc('album.photo', album.mediaItemsCount) }}</p>
       </div>
     </div>
 
@@ -26,10 +32,13 @@
 <script lang="ts">
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import { vxm } from '@/store/store.vuex'
+import Check from '../components/Check.vue'
 // eslint-disable-next-line no-undef
 import Album = gapi.client.photoslibrary.Album
 
-@Component
+@Component({
+  components: { Check }
+})
 export default class AlbumsManager extends Vue {
   selected: Album[] = []
 
@@ -43,7 +52,7 @@ export default class AlbumsManager extends Vue {
   }
 
   selectAlbum(album: Album) {
-    if (!this.selected.includes(album)) {
+    if (!this.isAlbumSelected(album)) {
       this.selected.push(album)
     } else {
       const index = this.selected.indexOf(album)
@@ -53,7 +62,7 @@ export default class AlbumsManager extends Vue {
     }
   }
   syncSelectedAlbums() {
-    console.log('sync')
+    console.log('sync', this.selected)
   }
 
   get isSignedIn() {
@@ -62,6 +71,11 @@ export default class AlbumsManager extends Vue {
 
   get albums() {
     return vxm.photos.albums
+  }
+
+  @Watch('selected')
+  isAlbumSelected(album: Album): boolean {
+    return this.selected.includes(album)
   }
 }
 </script>

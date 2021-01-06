@@ -43,12 +43,10 @@ export class UserStore extends VuexModule {
       .signInWithPopup(provider)
       .then(result => {
         /** @type {firebase.auth.OAuthCredential} */
-        const credential = result.credential
-
+        //const credential = result.credential
         // The signed-in user info.
         const user = result.user
         this[USER_SET](user)
-        // ...
       })
       .catch(error => {
         // Handle Errors here.
@@ -77,6 +75,7 @@ export class UserStore extends VuexModule {
   }
 
   get getUser() {
+    console.log(this.username)
     return this.username
   }
 }

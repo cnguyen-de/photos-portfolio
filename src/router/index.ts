@@ -64,7 +64,7 @@ router.beforeEach((to, from, next) => {
     next()
   } else {
     storeInit.then(() => {
-      const currentUser = getUser()
+      const currentUser = getUser()?.email === 'fotos.bichbui@gmail.com'
       if (!currentUser) {
         next('/login')
       } else {

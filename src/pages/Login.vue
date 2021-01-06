@@ -20,7 +20,7 @@
             {{ user.displayName }}
           </div>
           <div class="login__actions">
-            <router-link to="/photos-manager">
+            <router-link to="/photos-manager" v-if="user.email === 'fotos.bichbui@gmail.com'">
               <button
                 class="h-12 px-10 mb-4 rounded-full bg-gray-700 focus:outline-none hover:bg-gray-300 appearance-none outline-none border-2 border-gray-800 text-gray-300 hover:text-gray-700"
               >

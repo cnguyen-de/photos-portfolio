@@ -5,6 +5,7 @@ import i18n from './i18n'
 import { store } from './store/store.vuex'
 import VueGApi from 'vue-gapi'
 import googlePhotos from '@/services/google-photos'
+import { setBrowserLanguage } from './services/browser-language'
 
 Vue.config.productionTip = false
 
@@ -15,8 +16,18 @@ Vue.use(VueGApi, {
   scope: 'https://www.googleapis.com/auth/photoslibrary.readonly'
 })
 
+function fetchLanguage() {
+  const savedLanguage = localStorage.getItem('language')
+  if (typeof savedLanguage !== 'undefined' && savedLanguage) {
+    store.dispatch('app/setLanguage', savedLanguage)
+  } else {
+    setBrowserLanguage()
+  }
+}
+
 new Vue({
   created() {
+    fetchLanguage()
     googlePhotos.initialize(this.$gapi)
   },
   render: h => h(App),

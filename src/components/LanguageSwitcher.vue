@@ -2,7 +2,7 @@
   <div>
     <div class="language">
       <select
-        v-model="$i18n.locale"
+        v-model="language"
         class="language__options block text-center appearance-none w-full bg-transparent border border-gray-400 text-gray-100 py-1 px-4 rounded leading-tight focus:outline-none focus:bg-transparent focus:border-gray-200"
       >
         <option value="en">󠁧󠁢󠁥󠁮󠁧🇬🇧</option>
@@ -14,64 +14,20 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue, Watch } from 'vue-property-decorator'
+import { vxm } from '@/store/store.vuex'
 
 @Component
 export default class LanguageSwitcher extends Vue {
-  language = ''
-  otherLanguages = ['en', 'de', 'vi']
+  language = this.currentLanguage
 
-  created() {
-    if (this.hasSupportedLanguages()) {
-      if (this.$i18n) {
-        this.$i18n.locale = this.language
-      }
-    }
+  @Watch('language')
+  setLocale() {
+    this.$store.dispatch('app/setLanguage', this.language)
   }
 
-  setLocale(locale: string) {
-    this.$i18n.locale = locale
-  }
-
-  hasSupportedLanguages() {
-    let isSupported = false
-    const supportedLanguages = ['en', 'de', 'vi']
-    let browserLanguage = this.getFirstBrowserLanguage()
-    if (browserLanguage) {
-      if (this.getFirstBrowserLanguage()?.includes('en')) {
-        browserLanguage = 'en'
-      }
-      if (supportedLanguages.includes(browserLanguage)) {
-        this.language = browserLanguage
-        this.removeLanguageFromSupportedLanguages(this.language)
-        isSupported = true
-      }
-    }
-    return isSupported
-  }
-
-  getFirstBrowserLanguage() {
-    const nav = window.navigator
-    let i
-    let language: string
-
-    // support for HTML 5.1 "navigator.languages"
-    if (Array.isArray(nav.languages)) {
-      for (i = 0; i < nav.languages.length; i++) {
-        language = nav.languages[i]
-        if (language && language.length) {
-          return language
-        }
-      }
-    }
-    return null
-  }
-
-  removeLanguageFromSupportedLanguages(language: string) {
-    const index = this.otherLanguages.indexOf(language)
-    if (index !== -1) {
-      this.otherLanguages.splice(index, 1)
-    }
+  get currentLanguage() {
+    return vxm.app.getLanguage
   }
 }
 </script>

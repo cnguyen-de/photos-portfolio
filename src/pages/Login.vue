@@ -3,12 +3,12 @@
     <div class="login h-full w-full flex justify-center items-center">
       <div class="w-full h-2/3 lg:h-1/2 lg:w-1/2 bg-gray-800 flex justify-center items-center rounded-lg">
         <div class="login--no-user" v-if="!user">
-          <div class="text-2xl text-gray-100">You're not logged in</div>
+          <div class="text-2xl text-gray-100">{{ $t('user.notLoggedIn') }}</div>
           <button
             class="h-12 px-10 mb-4 rounded-full bg-gray-700 focus:outline-none hover:bg-gray-300 appearance-none outline-none border-2 border-gray-800 text-gray-300 hover:text-gray-700"
             @click="login()"
           >
-            Login with Google
+            {{ $t('user.loginWith') }} Google
           </button>
           {{ user }}
         </div>
@@ -32,7 +32,7 @@
               class="h-12 px-10 mb-4 rounded-full bg-red-500 focus:outline-none hover:bg-red-600 appearance-none outline-none text-gray-300 hover:text-gray-200"
               @click="logout()"
             >
-              Logout
+              {{ $t('user.logout') }}
             </button>
           </div>
         </div>

@@ -11,11 +11,13 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
   modules: {
     ...extractVuexModule(UserStore),
-    ...extractVuexModule(PhotosStore)
+    ...extractVuexModule(PhotosStore),
+    ...extractVuexModule(AppStore)
   }
 })
 
 export const vxm = {
   user: createProxy(store, UserStore),
-  photos: createProxy(store, PhotosStore)
+  photos: createProxy(store, PhotosStore),
+  app: createProxy(store, AppStore)
 }

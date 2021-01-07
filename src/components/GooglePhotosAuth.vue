@@ -1,10 +1,10 @@
 <template>
   <div class="flex flex-col">
     <button
-      class="h-12 text-xl px-10 mb-4 rounded-full bg-gray-700 focus:outline-none hover:bg-gray-300 appearance-none outline-none border-2 border-gray-800 text-gray-300 hover:text-gray-700"
+      class="min-h-12 py-2 max-w-md text-xl px-10 mb-4 rounded-full bg-gray-700 focus:outline-none hover:bg-gray-300 appearance-none outline-none border-2 border-gray-800 text-gray-300 hover:text-gray-700"
       @click="authenticate()"
     >
-      Authorize Google Photos Access
+      {{ $t('album.authorize') }}
     </button>
   </div>
 </template>

@@ -1,9 +1,12 @@
 {
+  "nav.homepage": "Trang chủ",
   "nav.gallery": "Trưng bày",
   "nav.album": "Tập ảnh",
   "nav.about": "Giới thiệu",
   "intro.greet": "Xin chào, tôi là Bích Bùi. chúc mừng năm mới 2021 🎉",
   "placeholder": "Đang cập nhật!",
   "album.authorize": "Cho phép kết nối với Google Photos",
+  "album.manager": "Quản lý ảnh",
+  "album.openNewTab": "Mở tập ảnh {0} trong tab mới",
   "album.photo": "ảnh"
 }

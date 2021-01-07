@@ -1,27 +1,19 @@
 <template>
-  <div class="h-full w-full flex flex-row flex-wrap">
-    <div v-for="album of albums" :key="album.id">
-      <div
-        class="album relative h-40 w-40 m-2 cursor-pointer rounded-md flex items-center justify-center bg-gray-800"
-        @click="selectAlbum(album)"
-        :class="{ ' border-4 border-blue-400': isAlbumSelected(album) }"
-      >
-        <Check class="absolute left-0 top-0 mt-1 ml-1 z-50" v-if="isAlbumSelected(album)" />
-        <img
-          :src="album.coverPhotoBaseUrl"
-          alt=""
-          class="absolute h-full object-cover rounded-md"
-          :class="{ selected: isAlbumSelected(album) }"
-        />
-      </div>
-      <div class="album-info text-sm text-center" :class="{ 'text-blue-400 font-bold': isAlbumSelected(album) }">
-        <p>{{ album.title }}</p>
-        <p>{{ album.mediaItemsCount }} {{ $tc('album.photo', album.mediaItemsCount) }}</p>
-      </div>
+  <div class="albums">
+    <div class="albums__homepage">
+      <div class="text-2xl">{{ $t('nav.homepage') }}</div>
+      <Albums :albums="homepageAlbum" />
     </div>
-
+    <div class="albums__gallery mt-4">
+      <div class="text-2xl">{{ $t('nav.gallery') }}</div>
+      <Albums :albums="galleryAlbum" />
+    </div>
+    <div class="albums__albums mt-4">
+      <div class="text-2xl">{{ $t('nav.album') }}</div>
+      <Albums :albums="albums" />
+    </div>
     <button
-      class="fixed right-0 bottom-0 bg-blue-400 hover:bg-blue-500 focus:outline-none px-6 py-2 text-base font-bold mr-8 mb-8 rounded-full appearance-none outline-none"
+      class="fixed right-0 bottom-0 bg-blue-700 hover:bg-blue-600 focus:outline-none px-6 py-2 text-base font-bold mr-8 mb-8 rounded-full appearance-none outline-none"
       @click="syncSelectedAlbums()"
     >
       Sync
@@ -33,11 +25,13 @@
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import { vxm } from '@/store/store.vuex'
 import Check from '../components/Check.vue'
+import Albums from '../components/Albums.vue'
+
 // eslint-disable-next-line no-undef
 import Album = gapi.client.photoslibrary.Album
 
 @Component({
-  components: { Check }
+  components: { Check, Albums }
 })
 export default class AlbumsManager extends Vue {
   selected: Album[] = []
@@ -62,7 +56,7 @@ export default class AlbumsManager extends Vue {
     }
   }
   syncSelectedAlbums() {
-    console.log('sync', this.selected)
+    console.log('sync', this.galleryAlbum)
   }
 
   get isSignedIn() {
@@ -70,7 +64,15 @@ export default class AlbumsManager extends Vue {
   }
 
   get albums() {
-    return vxm.photos.albums
+    return vxm.photos.albums.filter(album => album.title !== 'Gallery' && album.title !== 'Homepage')
+  }
+
+  get homepageAlbum() {
+    return vxm.photos.albums.filter(album => album.title?.toLowerCase() === 'homepage')
+  }
+
+  get galleryAlbum() {
+    return vxm.photos.albums.filter(album => album.title?.toLowerCase() === 'gallery')
   }
 
   @Watch('selected')

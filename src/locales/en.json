@@ -1,9 +1,12 @@
 {
+  "nav.homepage": "Homepage",
   "nav.gallery": "Gallery",
   "nav.album": "Albums",
   "nav.about": "About",
   "intro.greet": "Hi! I'm Bich Bui. Happy New Year! 🎉",
   "placeholder": "Coming Soon!",
   "album.authorize": "Authorize Google Photos Access",
+  "album.manager": "Photos Manager",
+  "album.openNewTab": "Open {0} album in new tab",
   "album.photo": "photo | photos"
 }

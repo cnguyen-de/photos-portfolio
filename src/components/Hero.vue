@@ -1,10 +1,38 @@
 <template>
-  <div class="hero min-h-screen h-screen min-w-screen grid place-items-center">
+  <div class="hero relative min-h-screen h-screen min-w-screen grid place-items-center">
     <div class="stories">
       <section class="user" v-for="img of array" :key="img" ref="img" @click="click($event)">
         <article class="story" :style="'background-image: url(' + img + ');'"></article>
       </section>
     </div>
+    <span
+      class="absolute right-0 top-1/2 z-50 mr-10 animate-bounce"
+      @click="navigateStories('next')"
+      v-if="isDisplayingArrows"
+    >
+      <svg
+        class="h-8 w-8 md:h-16 md:w-16 text-white opacity-70 cursor-pointer"
+        viewBox="0 0 15 15"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path d="M5 14l7-6.5L5 1" stroke="currentColor" stroke-linecap="square"></path>
+      </svg>
+    </span>
+    <span
+      class="absolute left-0 top-1/2 z-50 ml-10 md:ml-52 animate-bounce"
+      @click="navigateStories('prev')"
+      v-if="isDisplayingArrows"
+    >
+      <svg
+        class="h-8 w-8 md:h-16 md:w-16 text-white opacity-70 cursor-pointer"
+        viewBox="0 0 15 15"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path d="M10 14L3 7.5 10 1" stroke="currentColor" stroke-linecap="square"></path>
+      </svg>
+    </span>
   </div>
 </template>
 
@@ -21,9 +49,10 @@ export default class Hero extends Vue {
   array = ['a.jpg', 'b.jpg', 'c.jpg', 'd.jpg']
   stories: HTMLElement | null = null
   arrayStory: NodeListOf<HTMLElement> = document.querySelectorAll('.story')
+  isDisplayingArrows = true
   index = 0
   autoScroll = setInterval(() => {
-    this.navigateStories('next')
+    this.navigateStories('next', true)
   }, 10000)
 
   scrollListener = document.addEventListener('wheel', e => {
@@ -43,19 +72,21 @@ export default class Hero extends Vue {
     }
   }
 
-  navigateStories(direction: string) {
+  navigateStories(direction: string, force? = false) {
+    this.isDisplayingArrows = false
+
     if (direction === 'next') {
       if (this.index < this.arrayStory.length - 1) {
         this.index++
       } else {
-        this.index = 0
+        if (force) this.index = 0
       }
       this.arrayStory[this.index].scrollIntoView({ behavior: 'smooth' })
     } else if (direction === 'prev') {
       if (this.index > 0) {
         this.index--
       } else {
-        this.index = this.arrayStory.length - 1
+        if (force) this.index = this.arrayStory.length - 1
       }
       this.arrayStory[this.index].scrollIntoView({ behavior: 'smooth' })
     }

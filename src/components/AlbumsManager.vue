@@ -12,12 +12,6 @@
       <div class="text-2xl">{{ $t('nav.album') }}</div>
       <Albums :albums="albums" />
     </div>
-    <button
-      class="fixed right-0 bottom-0 bg-blue-700 hover:bg-blue-600 focus:outline-none px-6 py-2 text-base font-bold mr-8 mb-8 rounded-full appearance-none outline-none"
-      @click="syncSelectedAlbums()"
-    >
-      Sync
-    </button>
   </div>
 </template>
 
@@ -25,7 +19,7 @@
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import { vxm } from '@/store/store.vuex'
 import Check from '../components/Check.vue'
-import Albums from '../components/Albums.vue'
+import Albums from '../components/GooglePhotosAlbum.vue'
 
 // eslint-disable-next-line no-undef
 import Album = gapi.client.photoslibrary.Album
@@ -54,9 +48,6 @@ export default class AlbumsManager extends Vue {
         this.selected.splice(index, 1)
       }
     }
-  }
-  syncSelectedAlbums() {
-    console.log('sync', this.galleryAlbum)
   }
 
   get isSignedIn() {

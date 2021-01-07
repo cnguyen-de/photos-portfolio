@@ -55,7 +55,7 @@ export default class Hero extends Vue {
     this.navigateStories('next', true)
   }, 10000)
 
-  scrollListener = document.addEventListener('wheel', e => {
+  scrollListener = document.addEventListener('wheel', () => {
     clearInterval(this.autoScroll)
   })
 
@@ -72,7 +72,7 @@ export default class Hero extends Vue {
     }
   }
 
-  navigateStories(direction: string, force? = false) {
+  navigateStories(direction: string, force = false) {
     this.isDisplayingArrows = false
 
     if (direction === 'next') {

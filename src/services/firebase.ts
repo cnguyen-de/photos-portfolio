@@ -1,6 +1,3 @@
-import { store } from '../store/store.vuex'
-import { USER_SET } from '@/store/actions'
-
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
@@ -18,10 +15,13 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig)
 firebase.analytics()
-firebase.auth()
+const fbAuth = firebase.auth()
+const db = firebase.firestore()
+const albums = db.collection('albums')
+const photos = db.collection('photos')
 
 export function getUser() {
   return firebase.auth().currentUser
 }
 
-export default { getUser }
+export default { getUser, firebase, fbAuth, db, albums, photos }

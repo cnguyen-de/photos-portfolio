@@ -1,13 +1,13 @@
 <template>
   <div class="h-full w-full flex flex-row flex-wrap">
     <div v-for="album of albums" :key="album.id">
-      <a :href="album.productUrl" target="_blank" :title="$t('album.openNewTab', [album.title])">
+      <div :title="$t('album.openNewTab', [album.title])" @click.prevent="clickOnAlbum(album.productUrl)">
         <div
           class="albums__album relative h-40 w-40 my-2 mr-4 cursor-pointer rounded-md flex items-center justify-center bg-gray-800"
         >
           <img :src="album.coverPhotoBaseUrl" alt="" class="absolute h-full w-full object-cover rounded-md" />
         </div>
-      </a>
+      </div>
       <div class="albums__album-info text-sm mr-4 text-center">
         <p>{{ album.title }}</p>
         <p>{{ album.mediaItemsCount }} {{ $tc('album.photo', album.mediaItemsCount) }}</p>
@@ -41,13 +41,20 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator'
+import { Component, Vue, Prop, PropSync } from 'vue-property-decorator'
 
 // eslint-disable-next-line no-undef
 import Album = gapi.client.photoslibrary.Album
 @Component
 export default class Albums extends Vue {
   @Prop({ default: [] }) readonly albums: Album[] | undefined
+  @PropSync('googlePhotos', { type: Boolean }) isGooglePhotos!: boolean
+
+  clickOnAlbum(url: string) {
+    if (this.isGooglePhotos) {
+      window.open(url, '_blank')
+    }
+  }
 }
 </script>
 

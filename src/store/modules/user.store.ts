@@ -2,7 +2,6 @@ import { createModule, action, mutation } from 'vuex-class-component'
 import { USER_LOGIN, USER_LOGOUT, USER_SET } from '../actions'
 
 import firebase from 'firebase/app'
-import 'firebase/auth'
 
 const VuexModule = createModule({
   strict: false,

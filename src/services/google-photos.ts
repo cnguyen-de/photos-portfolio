@@ -14,7 +14,6 @@ export class GooglePhotos {
 
   getAlbum(albumId: string) {
     return this.handle<Album | null>(client => {
-      /** eslint-disable-next-line */
       return client.albums.get({ albumId }).then(response => response.result)
     }, null)
   }

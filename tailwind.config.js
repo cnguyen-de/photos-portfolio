@@ -641,11 +641,12 @@ module.exports = {
     transitionProperty: {
       none: 'none',
       all: 'all',
-      DEFAULT: 'background-color, border-color, color, fill, stroke, opacity, box-shadow, transform',
+      DEFAULT: 'background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, width',
       colors: 'background-color, border-color, color, fill, stroke',
       opacity: 'opacity',
       shadow: 'box-shadow',
-      transform: 'transform'
+      transform: 'transform',
+      width: 'width'
     },
     transitionTimingFunction: {
       DEFAULT: 'cubic-bezier(0.4, 0, 0.2, 1)',
@@ -840,15 +841,15 @@ module.exports = {
     transform: ['responsive'],
     transformOrigin: ['responsive'],
     transitionDelay: ['responsive'],
-    transitionDuration: ['responsive'],
-    transitionProperty: ['responsive'],
-    transitionTimingFunction: ['responsive'],
+    transitionDuration: ['responsive', 'hover'],
+    transitionProperty: ['responsive', 'hover'],
+    transitionTimingFunction: ['responsive', 'hover'],
     translate: ['responsive', 'hover', 'focus'],
     userSelect: ['responsive'],
     verticalAlign: ['responsive'],
     visibility: ['responsive'],
     whitespace: ['responsive'],
-    width: ['responsive'],
+    width: ['responsive', 'hover'],
     wordBreak: ['responsive'],
     zIndex: ['responsive', 'focus-within', 'focus']
   },

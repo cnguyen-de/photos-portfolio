@@ -66,7 +66,7 @@ export class PhotosStore extends VuexModule {
     }).then(album => {
       this.setAlbum(album)
       if (album) {
-        firebase.albums.doc(album.id).set({ album })
+        firebase.albums.doc(album.id).set({ ...album, ...{ time: Date.now() } })
       }
       this.searchMediaItems(albumId)
     })

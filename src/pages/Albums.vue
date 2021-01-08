@@ -16,16 +16,37 @@ import Album = fb.firestore.DocumentData
 @Component({ components: { Albums } })
 export default class About extends Vue {
   albums: Array<Album> = []
+  requiredRenewRequest = false
+  requested = false
   created() {
-    console.log('album')
-    firebase.albums.get().then(querySnapshot => {
+    const ref = firebase.storage.ref('image')
+    console.log(ref)
+    this.requestPhotos()
+  }
+
+  async requestPhotos() {
+    await firebase.albums.get().then(querySnapshot => {
       querySnapshot.forEach(doc => {
+        // console.log(doc.data())
         // doc.data() is never undefined for query doc snapshots
-        if (doc.data().album.title.toLowerCase() !== 'homepage' || doc.data().album.title.toLowerCase() !== 'gallery') {
-          this.albums.push(doc.data().album)
+        const album = doc.data()
+        if (album.title.toLowerCase() !== 'homepage' || album.title.toLowerCase() !== 'gallery') {
+          const deltaTimeSeconds = Math.floor((Date.now() - album.time) / 1000)
+          // console.log(`seconds elapsed = ${deltaTimeSeconds}`)
+          if (deltaTimeSeconds > 2000) {
+            this.$store.dispatch('photos/getAlbum', album.id)
+            this.requiredRenewRequest = true
+          } else {
+            this.albums.push(album)
+          }
         }
       })
-      console.log(this.albums)
+      if (this.requiredRenewRequest && !this.requested) {
+        console.log('re request')
+        this.requestPhotos()
+        this.requiredRenewRequest = false
+        this.requested = true
+      }
     })
   }
 }

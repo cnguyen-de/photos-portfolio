@@ -81,15 +81,15 @@ export default class PhotosManager extends Vue {
     const homepageAlbum = this.albums.filter(album => album.title?.toLowerCase() === 'homepage')
     const galleryAlbum = this.albums.filter(album => album.title?.toLowerCase() === 'gallery')
     const albums = this.albums.filter(album => album.title !== 'Gallery' && album.title !== 'Homepage')
-    /*  if (homepageAlbum.length !== 0) {
+    if (homepageAlbum.length !== 0) {
       this.syncAlbum(homepageAlbum)
-    } */
+    }
     if (galleryAlbum.length !== 0) {
       this.syncAlbum(galleryAlbum)
-    } /*
+    }
     if (galleryAlbum.length !== 0) {
       this.syncAlbum(albums)
-    } */
+    }
     //this.$store.dispatch('photos/getAlbum', this.albums[0].id)
   }
 

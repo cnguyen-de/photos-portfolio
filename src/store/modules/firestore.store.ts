@@ -59,14 +59,15 @@ export class Firestore extends VuexModule {
     this.albumPhotos = []
     firebase.albums
       .doc(albumId)
-      .collection('photos')
       .get()
-      .then(querySnapshot => {
-        querySnapshot.forEach(doc => {
-          // doc.data() is never undefined for query doc snapshots
-          const photo = doc.data()
-          this.addSelectedAlbumPhoto(photo)
-        })
+      .then(doc => {
+        if (doc.exists) {
+          if (doc.data()?.photos) {
+            this.albumPhotos = doc.data()?.photos
+          }
+        } else {
+          console.log('No such document!')
+        }
       })
   }
 
@@ -80,11 +81,11 @@ export class Firestore extends VuexModule {
     firebase.albums.doc(newAlbum.id).set(newAlbum)
   }
 
-  @mutation addSelectedAlbumPhoto(photo: Photo) {
+  /*   @mutation addSelectedAlbumPhoto(photo: Photo) {
     if (!this.albumPhotos.some(photoInArray => photoInArray.name === photo.name)) {
       this.albumPhotos.push(photo)
     }
-  }
+  } */
 
   @mutation updateSelectedTitle(title: string) {
     this.selectedAlbumTitle = title

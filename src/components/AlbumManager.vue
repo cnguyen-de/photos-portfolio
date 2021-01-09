@@ -6,16 +6,10 @@
         @click="selectAlbum(album.id)"
       >
         <img
-          :src="album.photos.url"
-          alt=""
-          class="absolute h-full w-full object-cover rounded-md"
-          v-if="album.photos.length === 1"
-        />
-        <img
           :src="album.photos[0].url"
           alt=""
           class="absolute h-full w-full object-cover rounded-md"
-          v-if="album.photos.length > 1"
+          v-if="album.photos.length > 0"
         />
       </div>
       <div class="albums__album-info text-sm mr-4 text-center">
@@ -44,13 +38,9 @@ import { vxm } from '@/store/store.vuex'
 export default class AlbumManager extends Vue {
   created() {
     this.$store.dispatch('firestore/getAlbums')
-    setTimeout(() => {
-      console.log(this.albums)
-    }, 400)
   }
 
   selectAlbum(albumId: string) {
-    console.log('select album id', albumId)
     this.$router.push(`/photos-manager/albums/${albumId}`)
   }
 
@@ -65,7 +55,6 @@ export default class AlbumManager extends Vue {
       }
     }).then(result => {
       if (result.isConfirmed) {
-        console.log('created')
         this.$store.dispatch('firestore/getAlbums')
       }
     })

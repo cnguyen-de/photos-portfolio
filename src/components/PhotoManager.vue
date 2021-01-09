@@ -83,6 +83,7 @@ import { Component, Vue, Watch } from 'vue-property-decorator'
 import Check from './Check.vue'
 import firebase from '../services/firebase'
 import fb from 'firebase/app'
+import FieldValue = fb.firestore.FieldValue
 import Photo = fb.firestore.DocumentData
 import { PhotoUpload } from '../types/PhotoUpload'
 import { vxm } from '@/store/store.vuex'
@@ -124,11 +125,9 @@ export default class Albums extends Vue {
             if (this.currentComponent !== 'albums') {
               this.firebaseTarget.doc(file.name).set({ name: file.name, url })
             } else {
-              this.firebaseTarget
-                .doc(this.getFirestorePhotosActionParam)
-                .collection('photos')
-                .doc(file.name)
-                .set({ name: file.name, url })
+              this.firebaseTarget.doc(this.getFirestorePhotosActionParam).update({
+                photos: FieldValue.arrayUnion({ name: file.name, url: url })
+              })
             }
             if (index === files.length - 1) {
               this.$store.dispatch(this.getFirestorePhotosAction, this.getFirestorePhotosActionParam)
@@ -170,9 +169,9 @@ export default class Albums extends Vue {
       this.selected.forEach((photo, index) => {
         this.firebaseTarget
           .doc(this.getFirestorePhotosActionParam)
-          .collection('photos')
-          .doc(photo?.name)
-          .delete()
+          .update({
+            photos: FieldValue.arrayRemove({ name: photo.name, url: photo.url })
+          })
           .then(() => {
             if (index === this.selected.length - 1) {
               this.selected = []

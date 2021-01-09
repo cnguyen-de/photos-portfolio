@@ -22,9 +22,10 @@ const storage = firebase.storage()
 const homepage = db.collection('homepage')
 const gallery = db.collection('gallery')
 const albums = db.collection('albums')
+const fieldValue = firebase.firestore.FieldValue
 
 export function getUser() {
   return firebase.auth().currentUser
 }
 
-export default { getUser, firebase, fbAuth, db, albums, homepage, gallery, storage }
+export default { getUser, firebase, fbAuth, db, albums, homepage, gallery, storage, fieldValue }

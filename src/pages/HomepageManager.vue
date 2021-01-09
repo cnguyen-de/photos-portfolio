@@ -52,7 +52,9 @@ export default class HomepageManager extends Vue {
     }
   }
   selectComponent(component: string) {
-    this.$store.dispatch('app/setSelectedPhotoManagerComponent', component)
+    setTimeout(() => {
+      this.$store.dispatch('app/setSelectedPhotoManagerComponent', component)
+    }, 50)
     if (component !== 'albums') this.$store.commit('firestore/updateSelectedTitle', '')
   }
 

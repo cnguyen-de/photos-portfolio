@@ -55,7 +55,7 @@ export default class HomepageManager extends Vue {
     setTimeout(() => {
       this.$store.dispatch('app/setSelectedPhotoManagerComponent', component)
     }, 50)
-    if (component !== 'albums') this.$store.commit('firestore/updateSelectedTitle', '')
+    this.$store.commit('firestore/updateSelectedTitle', '')
   }
 
   get selectedComponent() {

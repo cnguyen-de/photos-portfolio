@@ -74,11 +74,16 @@ import LanguageSwitcher from './LanguageSwitcher.vue'
 })
 export default class Navbar extends Vue {
   isNavbarDisplayed = false
+
   toggleNavbar(state?: boolean) {
-    if (typeof state !== 'undefined') {
-      this.isNavbarDisplayed = state
-    } else {
-      this.isNavbarDisplayed = !this.isNavbarDisplayed
+    console.log(window.innerWidth)
+    if (window.innerWidth < 768) {
+      console.log('toggle')
+      if (typeof state !== 'undefined') {
+        this.isNavbarDisplayed = state
+      } else {
+        this.isNavbarDisplayed = !this.isNavbarDisplayed
+      }
     }
   }
 }

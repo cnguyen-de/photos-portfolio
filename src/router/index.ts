@@ -29,7 +29,7 @@ export const routes = [
   },
   {
     path: '/albums/:id',
-    name: 'album',
+    name: 'album-viewer',
     component: () => import('@/components/AlbumViewer.vue')
   },
   {

@@ -29,7 +29,7 @@ import { vxm } from '@/store/store.vuex'
 
 @Component({ components: { Albums } })
 export default class About extends Vue {
-  created() {
+  mounted() {
     this.$store.dispatch('firestore/getAlbums')
   }
 

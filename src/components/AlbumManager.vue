@@ -35,7 +35,7 @@ import { vxm } from '@/store/store.vuex'
 
 @Component
 export default class AlbumManager extends Vue {
-  created() {
+  mounted() {
     this.$store.dispatch('firestore/getAlbums')
   }
 

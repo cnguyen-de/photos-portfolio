@@ -42,7 +42,7 @@
 
 <script lang="ts">
 import { Component, Vue, Prop, PropSync } from 'vue-property-decorator'
-
+// TODO REMOVE
 // eslint-disable-next-line no-undef
 import Album = gapi.client.photoslibrary.Album
 @Component

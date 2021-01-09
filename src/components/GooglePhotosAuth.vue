@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-
+// TODO REMOVE
 @Component
 export default class GooglePhotosAuth extends Vue {
   async authenticate() {

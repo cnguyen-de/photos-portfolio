@@ -18,23 +18,39 @@
         <div
           class="photos__photo relative h-40 md:h-64 w-40 md:w-64 my-4 mr-4 cursor-pointer rounded-md flex items-center justify-center bg-gray-800"
         >
-          <img :src="photo.url" alt="" class="absolute h-full w-full object-cover rounded-md" v-if="photo.url" />
+          <img
+            :src="photo.url"
+            alt=""
+            class="absolute h-full w-full object-cover rounded-md"
+            v-if="photo.url"
+            @click="displayFullscreenImage(photo)"
+          />
         </div>
       </div>
     </div>
     <div class="mt-20" v-else>This album has no photo</div>
+    <PhotoViewer component="albums" v-show="isDisplayingFullscreenImage" />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import { vxm } from '@/store/store.vuex'
-
-@Component
+import fb from 'firebase/app'
+import Photo = fb.firestore.DocumentData
+import PhotoViewer from '@/components/PhotoViewer.vue'
+@Component({
+  components: { PhotoViewer }
+})
 export default class AlbumViewer extends Vue {
   created() {
     const albumId = this.$route.path.split('/').slice(-1)[0]
     this.$store.dispatch('firestore/getAlbumPhotos', albumId)
+  }
+
+  displayFullscreenImage(image: Photo) {
+    this.$store.commit('app/setSelectedPhoto', image)
+    this.$store.commit('app/toggleFullscreenImage', true)
   }
 
   get albumPhotos() {
@@ -43,6 +59,10 @@ export default class AlbumViewer extends Vue {
 
   get albumTitle() {
     return vxm.firestore.selectedAlbumTitle
+  }
+
+  get isDisplayingFullscreenImage() {
+    return vxm.app.isDisplayingFullscreenImage
   }
 }
 </script>

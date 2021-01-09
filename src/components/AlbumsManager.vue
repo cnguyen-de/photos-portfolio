@@ -23,7 +23,7 @@ import Albums from '../components/GooglePhotosAlbum.vue'
 
 // eslint-disable-next-line no-undef
 import Album = gapi.client.photoslibrary.Album
-
+// TODO REMOVE
 @Component({
   components: { Check, Albums }
 })

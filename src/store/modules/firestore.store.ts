@@ -17,8 +17,6 @@ export class Firestore extends VuexModule {
   albumPhotos: Photo[] = []
 
   @action async getHomepagePhotos() {
-    console.log('dispatch homepage photos')
-
     this.homepagePhotos = []
     firebase.homepage.get().then(querySnapshot => {
       querySnapshot.forEach(doc => {
@@ -29,8 +27,6 @@ export class Firestore extends VuexModule {
   }
 
   @action async getGalleryPhotos() {
-    console.log('dispatch gallery photos')
-
     this.galleryPhotos = []
     firebase.gallery.get().then(querySnapshot => {
       querySnapshot.forEach(doc => {
@@ -41,8 +37,6 @@ export class Firestore extends VuexModule {
   }
 
   @action async getAlbums() {
-    console.log('dispatch albums')
-
     this.albums = []
     firebase.albums.get().then(querySnapshot => {
       querySnapshot.forEach(doc => {
@@ -54,7 +48,6 @@ export class Firestore extends VuexModule {
   }
 
   @action async getAlbumPhotos(albumId: string) {
-    console.log('dispatch get Albums Photo')
     this.albumPhotos = []
     firebase.albums
       .doc(albumId)
@@ -67,13 +60,12 @@ export class Firestore extends VuexModule {
             this.albumPhotos = doc.data()?.photos
           }
         } else {
-          console.log('No such document!')
+          console.log('Cannot find album')
         }
       })
   }
 
   @action async createAlbum(title: string) {
-    console.log('dispatch create album ', title)
     const newAlbum = {
       id: 'album' + Date.now(),
       title,

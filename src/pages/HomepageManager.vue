@@ -1,32 +1,32 @@
 <template>
   <div class="relative min-h-screen text-3xl pt-20 md:pt-4 p-4 pl-4 md:pl-48 text-white flex flex-col">
     <div class="relative pb-4 text-center">Photos Manager {{ currentAlbum }}</div>
-    <div class="w-full bg-gray-800 p-2 text-xl">
-      <router-link to="/photos-manager/homepage">
+    <div class="w-full bg-gray-800 p-2 text-base md:text-xl">
+      <router-link class="mr-3" to="/photos-manager/homepage">
         <button
-          class="bg-gray-900 rounded p-4 mr-2 focus:outline-none hover:bg-blue-900"
+          class="bg-gray-900 rounded p-3 focus:outline-none hover:bg-blue-900"
           :class="{ 'bg-blue-700': selectedComponent === 'homepage' }"
           @click="selectComponent('homepage')"
         >
-          Homepage
+          {{ $t('nav.homepage') }}
         </button>
       </router-link>
-      <router-link to="/photos-manager/gallery">
+      <router-link class="mr-3" to="/photos-manager/gallery">
         <button
-          class="bg-gray-900 rounded p-4 mr-2 focus:outline-none hover:bg-blue-900"
+          class="bg-gray-900 rounded p-3 focus:outline-none hover:bg-blue-900"
           :class="{ 'bg-blue-700': selectedComponent === 'gallery' }"
           @click="selectComponent('gallery')"
         >
-          Gallery
+          {{ $t('nav.gallery') }}
         </button>
       </router-link>
       <router-link to="/photos-manager/albums">
         <button
-          class="bg-gray-900 rounded p-4 focus:outline-none hover:bg-blue-900"
+          class="bg-gray-900 rounded p-3 focus:outline-none hover:bg-blue-900"
           :class="{ 'bg-blue-700': selectedComponent === 'albums' }"
           @click="selectComponent('albums')"
         >
-          Albums
+          {{ $t('nav.album') }}
         </button>
       </router-link>
     </div>

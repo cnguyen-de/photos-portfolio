@@ -55,13 +55,14 @@ export class Firestore extends VuexModule {
 
   @action async getAlbumPhotos(albumId: string) {
     console.log('dispatch get Albums Photo')
-
     this.albumPhotos = []
     firebase.albums
       .doc(albumId)
       .get()
       .then(doc => {
         if (doc.exists) {
+          this.updateSelectedTitle(doc.data()?.title)
+
           if (doc.data()?.photos) {
             this.albumPhotos = doc.data()?.photos
           }

@@ -1,7 +1,7 @@
 <template>
   <div class="text-3xl pt-20 md:pt-4 p-4 pl-4 md:pl-48 text-white flex justify-center">
     <div class="container">
-      <figure v-for="image of galleryPhotos" :key="image">
+      <figure v-for="image of galleryPhotos" :key="image.name">
         <img
           class="rounded-lg cursor-pointer"
           loading="lazy"

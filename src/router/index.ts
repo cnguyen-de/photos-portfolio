@@ -28,6 +28,11 @@ export const routes = [
     component: () => import('@/pages/Albums.vue')
   },
   {
+    path: '/albums/:id',
+    name: 'album',
+    component: () => import('@/components/AlbumViewer.vue')
+  },
+  {
     path: '/login',
     name: 'login',
     component: () => import('@/pages/Login.vue')

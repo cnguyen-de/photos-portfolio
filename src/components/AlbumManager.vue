@@ -14,8 +14,7 @@
       </div>
       <div class="albums__album-info text-sm mr-4 text-center">
         <p>{{ album.title }}</p>
-        <!--         <p>{{ album.photos.length }} {{ $tc('album.photo', album.photos.length) }}</p>
- -->
+        <p>{{ album.photos.length }} {{ $tc('album.photo', album.photos.length) }}</p>
       </div>
     </div>
 

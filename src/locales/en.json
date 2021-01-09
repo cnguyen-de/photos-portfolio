@@ -9,7 +9,7 @@
   "user.loginWith": "Login with",
   "user.logout": "Logout",
   "album.authorize": "Authorize Google Photos Access",
-  "album.manager": "Photos Manager",
+  "album.manager": "Google Photos Manager",
   "album.homepageManager": "Homepage Manager",
   "album.openNewTab": "Open {0} album in new tab",
   "album.photo": "photo | photos"

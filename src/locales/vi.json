@@ -9,7 +9,7 @@
   "user.loginWith": "Đăng nhập bằng",
   "user.logout": "Đăng xuất",
   "album.authorize": "Cho phép kết nối với Google Photos",
-  "album.manager": "Quản lý ảnh",
+  "album.manager": "Quản lý ảnh Google Photos",
   "album.homepageManager": "Quản lý trang chủ",
 
   "album.openNewTab": "Mở tập ảnh {0} trong tab mới",

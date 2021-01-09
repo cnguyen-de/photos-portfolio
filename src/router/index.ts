@@ -33,20 +33,25 @@ export const routes = [
     component: () => import('@/pages/Login.vue')
   },
   {
-    path: '/photos-manager',
-    name: 'photos-manager',
+    path: '/googlephotos-manager',
+    name: 'googlephotos-manager',
     component: () => import('@/pages/PhotosManager.vue'),
     meta: {
       requiresAuth: true
     }
   },
   {
-    path: '/homepage-manager',
-    name: 'homepage-manager',
+    path: '/photos-manager',
+    name: 'photos-manager',
     component: () => import('@/pages/HomepageManager.vue'),
     meta: {
       requiresAuth: true
-    }
+    },
+    children: [
+      { path: 'homepage', component: () => import('@/components/PhotoManager.vue') },
+      { path: 'gallery', component: () => import('@/components/PhotoManager.vue') },
+      { path: 'albums', compoennt: () => import('@/components/AlbumManager.vue') }
+    ]
   },
   {
     path: '/terms-of-service',

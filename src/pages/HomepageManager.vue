@@ -1,16 +1,59 @@
 <template>
   <div class="relative min-h-screen text-3xl pt-20 md:pt-4 p-4 pl-4 md:pl-48 text-white flex flex-col">
-    <div class="relative pb-4 text-center">Homepage Manager</div>
-    <PhotoManager target="homepage" />
+    <div class="relative pb-4 text-center">Photos Manager</div>
+    <div class="w-full bg-gray-800 p-2 text-xl">
+      <router-link to="/photos-manager/homepage">
+        <button
+          class="bg-gray-900 rounded p-4 mr-2 focus:outline-none hover:bg-blue-900"
+          :class="{ 'bg-blue-700': selectedComponent === 'homepage' }"
+          @click="selectComponent('homepage')"
+        >
+          Homepage
+        </button>
+      </router-link>
+      <router-link to="/photos-manager/gallery">
+        <button
+          class="bg-gray-900 rounded p-4 mr-2 focus:outline-none hover:bg-blue-900"
+          :class="{ 'bg-blue-700': selectedComponent === 'gallery' }"
+          @click="selectComponent('gallery')"
+        >
+          Gallery
+        </button>
+      </router-link>
+      <router-link to="/photos-manager/albums">
+        <button
+          class="bg-gray-900 rounded p-4 focus:outline-none hover:bg-blue-900"
+          :class="{ 'bg-blue-700': selectedComponent === 'albums' }"
+          @click="selectComponent('albums')"
+        >
+          Albums
+        </button>
+      </router-link>
+    </div>
+    <router-view />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import PhotoManager from '../components/PhotoManager.vue'
+import AlbumManager from '../components/AlbumManager.vue'
 
-@Component({ components: { PhotoManager } })
-export default class HomepageManager extends Vue {}
+import { vxm } from '@/store/store.vuex'
+
+@Component({ components: { PhotoManager, AlbumManager } })
+export default class HomepageManager extends Vue {
+  mounted() {
+    this.$store.dispatch('app/setSelectedPhotoManagerComponent', 'homepage')
+  }
+  selectComponent(component: string) {
+    this.$store.dispatch('app/setSelectedPhotoManagerComponent', component)
+  }
+
+  get selectedComponent() {
+    return vxm.app.selectedPhotoManagerComponent
+  }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

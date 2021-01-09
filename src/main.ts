@@ -6,6 +6,12 @@ import { store } from './store/store.vuex'
 import VueGApi from 'vue-gapi'
 import googlePhotos from '@/services/google-photos'
 import { setBrowserLanguage } from './services/browser-language'
+import VueSweetalert2 from 'vue-sweetalert2'
+
+// If you don't need the styles, do not connect
+import 'sweetalert2/dist/sweetalert2.min.css'
+
+Vue.use(VueSweetalert2)
 
 Vue.config.productionTip = false
 

@@ -8,10 +8,11 @@
       >
         <Check class="absolute left-0 top-0 mt-1 ml-1 z-50" v-if="isPhotoSelected(photo)" />
         <img
-          :src="photo.name"
+          :src="photo.url"
           alt=""
           class="absolute h-full w-full object-cover rounded-md"
           :class="{ selected: isPhotoSelected(photo) }"
+          v-if="photo.url"
         />
       </div>
     </div>
@@ -35,7 +36,6 @@
         />
       </div>
     </div>
-
     <div
       class="photos__photo relative h-40 md:h-64 w-40 md:w-64 my-4 mr-4 cursor-pointer rounded-md flex items-center justify-center bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-gray-100"
       @click="$refs.fileUpload.click()"
@@ -53,6 +53,7 @@
         <path d="M7.5 1v13M1 7.5h13" stroke="currentColor"></path>
       </svg>
     </div>
+
     <div
       class="fixed flex flex-row transition duration-150 ease-linear right-0 bottom-0 bg-blue-600 hover:bg-blue-500 focus:outline-none px-6 py-2 text-base font-bold mr-8 mb-8 rounded-full appearance-none outline-none"
       @click="deleteImages()"
@@ -78,7 +79,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Watch, PropSync } from 'vue-property-decorator'
+import { Component, Vue, Watch } from 'vue-property-decorator'
 import Check from './Check.vue'
 import firebase from '../services/firebase'
 import fb from 'firebase/app'
@@ -90,27 +91,14 @@ import { vxm } from '@/store/store.vuex'
   components: { Check }
 })
 export default class Albums extends Vue {
-  @PropSync('target', { type: String }) targetComponent!: string
-
   previewPhotos: PhotoUpload[] = []
   selected: Photo[] = []
   firebaseTarget: fb.firestore.CollectionReference<Photo> = firebase.homepage
-  created() {
-    this.$store.dispatch('firestore/getHomepagePhotos')
+  getFirestorePhotosAction = ''
+  photos: Photo[] = []
 
-    switch (this.targetComponent) {
-      case 'homepage':
-        this.firebaseTarget = firebase.homepage
-        break
-      case 'gallery':
-        this.firebaseTarget = firebase.gallery
-        break
-      case 'albums':
-        this.firebaseTarget = firebase.albums
-        break
-      default:
-        break
-    }
+  created() {
+    this.updateValues()
   }
   onFileChange() {
     const files: ReadonlyArray<File> = [...(this.upload.files ? this.upload.files : [])]
@@ -134,8 +122,9 @@ export default class Albums extends Vue {
             this.previewPhotos[index].url = url
             this.firebaseTarget.doc(file.name).set({ name: file.name, url })
             if (index === files.length - 1) {
-              this.$store.dispatch('firestore/getHomepagePhotos')
+              this.$store.dispatch(this.getFirestorePhotosAction)
               this.previewPhotos = []
+              return
             }
             index++
           })
@@ -157,7 +146,7 @@ export default class Albums extends Vue {
         .then(() => {
           if (index === this.selected.length - 1) {
             this.selected = []
-            this.$store.dispatch('firestore/getHomepagePhotos')
+            this.$store.dispatch(this.getFirestorePhotosAction)
           }
         })
     })
@@ -179,8 +168,55 @@ export default class Albums extends Vue {
     return this.selected.includes(photo)
   }
 
-  get photos() {
+  @Watch('homepagePhotos')
+  updateHomepagePhotos() {
+    if (this.currentComponent === 'homepage') this.photos = this.homepagePhotos
+    console.log(this.photos)
+  }
+  get homepagePhotos() {
     return vxm.firestore.homepagePhotos
+  }
+
+  @Watch('galleryPhotos')
+  updateGalleryPhotos() {
+    if (this.currentComponent === 'gallery') this.photos = this.galleryPhotos
+  }
+  get galleryPhotos() {
+    return vxm.firestore.galleryPhotos
+  }
+
+  @Watch('albums')
+  updateAlbums() {
+    if (this.currentComponent === 'albums') this.photos = this.albums
+    console.log(this.photos)
+  }
+  get albums() {
+    return vxm.firestore.albums
+  }
+
+  @Watch('currentComponent')
+  updateValues() {
+    switch (this.currentComponent) {
+      case 'homepage':
+        this.firebaseTarget = firebase.homepage
+        this.getFirestorePhotosAction = 'firestore/getHomepagePhotos'
+        break
+      case 'gallery':
+        this.firebaseTarget = firebase.gallery
+        this.getFirestorePhotosAction = 'firestore/getGalleryPhotos'
+        break
+      case 'albums':
+        this.firebaseTarget = firebase.albums
+        this.getFirestorePhotosAction = 'firestore/getAlbums'
+        break
+      default:
+        break
+    }
+    this.$store.dispatch(this.getFirestorePhotosAction)
+  }
+
+  get currentComponent() {
+    return vxm.app.selectedPhotoManagerComponent
   }
 }
 </script>

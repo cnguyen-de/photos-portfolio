@@ -74,7 +74,6 @@ export class UserStore extends VuexModule {
   }
 
   get getUser() {
-    console.log(this.username)
     return this.username
   }
 }

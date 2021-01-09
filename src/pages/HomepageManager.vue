@@ -1,6 +1,6 @@
 <template>
   <div class="relative min-h-screen text-3xl pt-20 md:pt-4 p-4 pl-4 md:pl-48 text-white flex flex-col">
-    <div class="relative pb-4 text-center">Photos Manager</div>
+    <div class="relative pb-4 text-center">Photos Manager {{ currentAlbum }}</div>
     <div class="w-full bg-gray-800 p-2 text-xl">
       <router-link to="/photos-manager/homepage">
         <button
@@ -43,15 +43,25 @@ import { vxm } from '@/store/store.vuex'
 
 @Component({ components: { PhotoManager, AlbumManager } })
 export default class HomepageManager extends Vue {
+  routePaths = ''
   mounted() {
-    this.$store.dispatch('app/setSelectedPhotoManagerComponent', 'homepage')
+    this.routePaths = this.$route.path.split('/').slice(-1)[0]
+
+    if (this.routePaths === 'homepage' || this.routePaths === 'gallery' || this.routePaths === 'albums') {
+      this.$store.dispatch('app/setSelectedPhotoManagerComponent', this.routePaths)
+    }
   }
   selectComponent(component: string) {
     this.$store.dispatch('app/setSelectedPhotoManagerComponent', component)
+    if (component !== 'albums') this.$store.commit('firestore/updateSelectedTitle', '')
   }
 
   get selectedComponent() {
     return vxm.app.selectedPhotoManagerComponent
+  }
+
+  get currentAlbum() {
+    return vxm.firestore.selectedAlbumTitle
   }
 }
 </script>

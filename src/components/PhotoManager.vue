@@ -95,23 +95,24 @@ export default class Albums extends Vue {
   selected: Photo[] = []
   firebaseTarget: fb.firestore.CollectionReference<Photo> = firebase.homepage
   getFirestorePhotosAction = ''
+  getFirestorePhotosActionParam = ''
   photos: Photo[] = []
 
   created() {
+    this.$store.dispatch('app/setSelectedPhotoManagerComponent', 'albums')
     this.updateValues()
   }
+
   onFileChange() {
     const files: ReadonlyArray<File> = [...(this.upload.files ? this.upload.files : [])]
     let index = 0
     files.forEach(file => {
-      console.log(this.previewPhotos, file)
       this.previewPhotos.push({ url: null, progress: 0 })
 
       const storageRef = firebase.storage.ref(`${file.name}`).put(file)
       storageRef.on(
         `state_changed`,
-        snapshot => {
-          console.log((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
+        () => {
           this.previewPhotos[index].progress = this.previewPhotos[index].progress + 5
         },
         error => {
@@ -120,9 +121,17 @@ export default class Albums extends Vue {
         () => {
           storageRef.snapshot.ref.getDownloadURL().then(url => {
             this.previewPhotos[index].url = url
-            this.firebaseTarget.doc(file.name).set({ name: file.name, url })
+            if (this.currentComponent !== 'albums') {
+              this.firebaseTarget.doc(file.name).set({ name: file.name, url })
+            } else {
+              this.firebaseTarget
+                .doc(this.getFirestorePhotosActionParam)
+                .collection('photos')
+                .doc(file.name)
+                .set({ name: file.name, url })
+            }
             if (index === files.length - 1) {
-              this.$store.dispatch(this.getFirestorePhotosAction)
+              this.$store.dispatch(this.getFirestorePhotosAction, this.getFirestorePhotosActionParam)
               this.previewPhotos = []
               return
             }
@@ -139,17 +148,45 @@ export default class Albums extends Vue {
   }
 
   deleteImages() {
-    this.selected.forEach((photo, index) => {
-      this.firebaseTarget
-        .doc(photo?.name)
-        .delete()
-        .then(() => {
-          if (index === this.selected.length - 1) {
-            this.selected = []
-            this.$store.dispatch(this.getFirestorePhotosAction)
-          }
-        })
-    })
+    if (this.currentComponent !== 'albums') {
+      this.selected.forEach((photo, index) => {
+        this.firebaseTarget
+          .doc(photo?.name)
+          .delete()
+          .then(() => {
+            if (index === this.selected.length - 1) {
+              this.selected = []
+              this.$store.dispatch(this.getFirestorePhotosAction, this.getFirestorePhotosActionParam)
+              this.$swal({
+                position: 'bottom',
+                text: 'Photo deleted',
+                showConfirmButton: false,
+                timer: 1500
+              })
+            }
+          })
+      })
+    } else {
+      this.selected.forEach((photo, index) => {
+        this.firebaseTarget
+          .doc(this.getFirestorePhotosActionParam)
+          .collection('photos')
+          .doc(photo?.name)
+          .delete()
+          .then(() => {
+            if (index === this.selected.length - 1) {
+              this.selected = []
+              this.$store.dispatch(this.getFirestorePhotosAction, this.getFirestorePhotosActionParam)
+              this.$swal({
+                position: 'bottom',
+                text: 'Photo deleted',
+                showConfirmButton: false,
+                timer: 1500
+              })
+            }
+          })
+      })
+    }
   }
 
   selectPhoto(photo: Photo) {
@@ -171,7 +208,6 @@ export default class Albums extends Vue {
   @Watch('homepagePhotos')
   updateHomepagePhotos() {
     if (this.currentComponent === 'homepage') this.photos = this.homepagePhotos
-    console.log(this.photos)
   }
   get homepagePhotos() {
     return vxm.firestore.homepagePhotos
@@ -185,13 +221,12 @@ export default class Albums extends Vue {
     return vxm.firestore.galleryPhotos
   }
 
-  @Watch('albums')
-  updateAlbums() {
-    if (this.currentComponent === 'albums') this.photos = this.albums
-    console.log(this.photos)
+  @Watch('albumPhotos')
+  updateAlbumsPhotos() {
+    if (this.currentComponent === 'albums') this.photos = this.albumPhotos
   }
-  get albums() {
-    return vxm.firestore.albums
+  get albumPhotos() {
+    return vxm.firestore.albumPhotos
   }
 
   @Watch('currentComponent')
@@ -207,12 +242,13 @@ export default class Albums extends Vue {
         break
       case 'albums':
         this.firebaseTarget = firebase.albums
-        this.getFirestorePhotosAction = 'firestore/getAlbums'
+        this.getFirestorePhotosAction = 'firestore/getAlbumPhotos'
+        this.getFirestorePhotosActionParam = this.$route.path.split('/').slice(-1)[0]
         break
       default:
         break
     }
-    this.$store.dispatch(this.getFirestorePhotosAction)
+    this.$store.dispatch(this.getFirestorePhotosAction, this.getFirestorePhotosActionParam)
   }
 
   get currentComponent() {

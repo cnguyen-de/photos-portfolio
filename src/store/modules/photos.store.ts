@@ -88,13 +88,11 @@ export class PhotosStore extends VuexModule {
 
   @mutation setAlbum(album: Album | null) {
     this.album = album
-    console.log('set album', album)
     this.mediaItems = []
   }
 
   @mutation setMediaItems(mediaItems: MediaItem[]) {
     this.mediaItems = mediaItems
-    console.log('set media items', mediaItems)
   }
 
   @mutation addMediaItems(mediaItems: MediaItem[]) {
@@ -106,7 +104,6 @@ export class PhotosStore extends VuexModule {
   }
 
   get getMediaItems() {
-    console.log(this.mediaItems)
     return this.mediaItems
   }
 }

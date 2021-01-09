@@ -1,8 +1,6 @@
 <template>
   <div class="text-3xl pt-20 md:pt-4 p-4 pl-4 md:pl-48 text-white flex justify-center">
-    <div class="">
-      <Albums :albums="albums" :googlePhotos="false" />
-    </div>
+    {{ $t('placeholder') }}
   </div>
 </template>
 
@@ -17,7 +15,6 @@ import Album = fb.firestore.DocumentData
 export default class About extends Vue {
   albums: Array<Album> = []
   created() {
-    console.log('album')
     firebase.albums.get().then(querySnapshot => {
       querySnapshot.forEach(doc => {
         // doc.data() is never undefined for query doc snapshots
@@ -25,7 +22,6 @@ export default class About extends Vue {
           this.albums.push(doc.data().album)
         }
       })
-      console.log(this.albums)
     })
   }
 }

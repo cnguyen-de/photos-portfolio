@@ -6,15 +6,22 @@
         @click="selectAlbum(album.id)"
       >
         <img
+          :src="album.photos.url"
+          alt=""
+          class="absolute h-full w-full object-cover rounded-md"
+          v-if="album.photos.length === 1"
+        />
+        <img
           :src="album.photos[0].url"
           alt=""
           class="absolute h-full w-full object-cover rounded-md"
-          v-if="album.photos.length !== 0"
+          v-if="album.photos.length > 1"
         />
       </div>
       <div class="albums__album-info text-sm mr-4 text-center">
         <p>{{ album.title }}</p>
-        <p>{{ album.photos.length }} {{ $tc('album.photo', album.photos.length) }}</p>
+        <!--         <p>{{ album.photos.length }} {{ $tc('album.photo', album.photos.length) }}</p>
+ -->
       </div>
     </div>
 
@@ -39,15 +46,15 @@ export default class AlbumManager extends Vue {
     this.$store.dispatch('firestore/getAlbums')
     setTimeout(() => {
       console.log(this.albums)
-    }, 500)
+    }, 400)
   }
 
   selectAlbum(albumId: string) {
-    console.log('select album id')
+    console.log('select album id', albumId)
+    this.$router.push(`/photos-manager/albums/${albumId}`)
   }
 
   addAlbum() {
-    console.log('new album')
     this.$swal({
       title: 'What the title of new album?',
       input: 'text',

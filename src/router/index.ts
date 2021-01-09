@@ -50,7 +50,8 @@ export const routes = [
     children: [
       { path: 'homepage', component: () => import('@/components/PhotoManager.vue') },
       { path: 'gallery', component: () => import('@/components/PhotoManager.vue') },
-      { path: 'albums', compoennt: () => import('@/components/AlbumManager.vue') }
+      { path: 'albums', component: () => import('@/components/AlbumManager.vue') },
+      { path: 'albums/:id', component: () => import('@/components/PhotoManager.vue') }
     ]
   },
   {

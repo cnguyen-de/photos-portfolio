@@ -1,11 +1,11 @@
 <template>
   <div class="text-3xl pt-20 md:pt-4 p-4 pl-4 md:pl-48 text-white flex justify-center">
     <div class="container">
-      <figure v-for="image of array" :key="image">
+      <figure v-for="image of galleryPhotos" :key="image">
         <img
           class="rounded-lg cursor-pointer"
           loading="lazy"
-          :src="image"
+          :src="image.url"
           @contextmenu.prevent=""
           alt=""
           @click="displayFullscreenImage(image)"
@@ -32,13 +32,18 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
+import { vxm } from '@/store/store.vuex'
 
 @Component
 export default class Gallery extends Vue {
-  array = ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg', '8.jpg']
   isDisplayingFullscreenImage = false
   selectedImage = ''
   body = document.querySelector('body')
+
+  created() {
+    this.$store.dispatch('firestore/getGalleryPhotos')
+  }
+
   displayFullscreenImage(image: string) {
     this.selectedImage = image
     this.isDisplayingFullscreenImage = true
@@ -48,6 +53,10 @@ export default class Gallery extends Vue {
     this.selectedImage = ''
     this.isDisplayingFullscreenImage = false
     if (this.body) this.body.style.overflow = 'auto'
+  }
+
+  get galleryPhotos() {
+    return vxm.firestore.galleryPhotos
   }
 }
 </script>

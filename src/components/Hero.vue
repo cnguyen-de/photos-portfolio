@@ -1,8 +1,8 @@
 <template>
   <div class="hero relative min-h-screen h-screen min-w-screen grid place-items-center">
     <div class="stories">
-      <section class="user" v-for="img of array" :key="img" ref="img" @click="click($event)">
-        <article class="story" :style="'background-image: url(' + img + ');'"></article>
+      <section class="user" v-for="img of homepagePhotos" :key="img.name" ref="img" @click="click($event)">
+        <article class="story" :style="'background-image: url(' + img.url + ');'"></article>
       </section>
     </div>
     <span
@@ -39,6 +39,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import Navbar from './Navbar.vue'
+import { vxm } from '@/store/store.vuex'
 
 @Component({
   components: {
@@ -46,7 +47,6 @@ import Navbar from './Navbar.vue'
   }
 })
 export default class Hero extends Vue {
-  array = ['a.jpg', 'b.jpg', 'c.jpg', 'd.jpg']
   stories: HTMLElement | null = null
   arrayStory: NodeListOf<HTMLElement> = document.querySelectorAll('.story')
   isDisplayingArrows = true
@@ -59,9 +59,14 @@ export default class Hero extends Vue {
     clearInterval(this.autoScroll)
   })
 
+  created() {
+    this.$store.dispatch('firestore/getHomepagePhotos')
+  }
   mounted() {
-    this.stories = this.$el.querySelector('.stories')
-    this.arrayStory = this.$el.querySelectorAll('.story')
+    setTimeout(() => {
+      this.stories = this.$el.querySelector('.stories')
+      this.arrayStory = this.$el.querySelectorAll('.story')
+    }, 1000)
   }
 
   click($event: MouseEvent) {
@@ -90,6 +95,10 @@ export default class Hero extends Vue {
       }
       this.arrayStory[this.index].scrollIntoView({ behavior: 'smooth' })
     }
+  }
+
+  get homepagePhotos() {
+    return vxm.firestore.homepagePhotos
   }
 }
 </script>

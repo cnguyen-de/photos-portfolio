@@ -41,6 +41,14 @@ export const routes = [
     }
   },
   {
+    path: '/homepage-manager',
+    name: 'homepage-manager',
+    component: () => import('@/pages/HomepageManager.vue'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
     path: '/terms-of-service',
     name: 'tos',
     component: () => import('@/pages/TOS.vue')

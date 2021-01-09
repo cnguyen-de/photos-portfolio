@@ -74,13 +74,4 @@ export default class AlbumsManager extends Vue {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-.album {
-  transform: scale(1);
-  transition: all 0.1s ease-in-out;
-}
-.selected {
-  transform: scale(0.9);
-  transition: all 0.1s ease-in-out;
-}
-</style>
+<style scoped></style>

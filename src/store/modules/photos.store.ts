@@ -36,7 +36,7 @@ export class PhotosStore extends VuexModule {
           this.addMediaItems(response.mediaItems)
         } else {
           this.setMediaItems(response.mediaItems)
-          firebase.albums.doc(albumId).update({ photos: response.mediaItems })
+          //firebase.albums.doc(albumId).update({ photos: response.mediaItems })
         }
       }
 

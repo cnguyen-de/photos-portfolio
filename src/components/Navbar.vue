@@ -12,22 +12,34 @@
         </span>
       </div>
       <div class="flex-grow"></div>
-      <div class="nav__links flex flex-col">
-        <router-link to="/gallery" class="p-2">
+      <div class="navbar__links flex flex-col font-thin tracking-wide">
+        <router-link to="/gallery" class="navbar__link relative my-2">
           <span class="text-base lg:text-2xl text-white" @click="toggleNavbar()">{{ $t('nav.gallery') }}</span>
         </router-link>
 
-        <router-link to="/albums" class="p-2">
+        <router-link to="/albums" class="navbar__link relative my-2">
           <span class="text-base lg:text-2xl text-white" @click="toggleNavbar()">{{ $t('nav.album') }}</span>
         </router-link>
 
-        <router-link to="/about" class="p-2">
+        <router-link to="/about" class="navbar__link relative my-2">
           <span class="text-base lg:text-2xl text-white" @click="toggleNavbar()">{{ $t('nav.about') }}</span>
         </router-link>
       </div>
       <div class="flex-grow"></div>
-      <LanguageSwitcher class="w-full px-16 lg:pb-10 pb-20" />
+      <router-link to="/login">
+        <button
+          class="px-4 py-2 bg-gray-800 bg-opacity-20 rounded-full hover:bg-opacity-50 mb-2 focus:outline-none"
+          v-if="!user"
+        >
+          Login
+        </button>
+        <div class="h-12 w-12 mb-2" v-else>
+          <img :src="user.photoURL" alt="" class="absoulte rounded-full h-full w-full object-cover" />
+        </div>
+      </router-link>
+      <LanguageSwitcher class="w-full px-16 lg:pb-12 pb-24" />
     </div>
+
     <div
       class="nav--mobile md:hidden flex fixed h-16 left-0 bg-opacity-50 z-50 bg-gradient-to-b from-transBlack to-transparent w-screen items-center justify-center"
     >
@@ -68,6 +80,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import LanguageSwitcher from './LanguageSwitcher.vue'
+import { vxm } from '@/store/store.vuex'
 
 @Component({
   components: { LanguageSwitcher }
@@ -84,6 +97,10 @@ export default class Navbar extends Vue {
       }
     }
   }
+
+  get user() {
+    return vxm.user.username
+  }
 }
 </script>
 
@@ -94,5 +111,24 @@ svg {
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
   transition: all 0.5s ease;
+}
+.navbar__link {
+  transition-delay: 0.2;
+  transform: translate(0%, 100%);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.navbar__link:before {
+  content: '';
+  position: absolute;
+  background: white;
+  width: 0px;
+  height: 1px;
+  top: 100%;
+  transform: translate(0%, 0%);
+  transition: all 0.2s ease;
+  z-index: -1;
+}
+.navbar__link:hover:before {
+  width: 100%;
 }
 </style>

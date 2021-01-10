@@ -2,7 +2,9 @@
   <div id="app">
     <Navbar />
     <div class="content min-h-screen min-w-screen bg-gray-900 select-none">
-      <router-view />
+      <transition name="fade" mode="out-in">
+        <router-view />
+      </transition>
     </div>
   </div>
 </template>
@@ -21,4 +23,15 @@ export default class App extends Vue {}
 
 <style>
 @import 'assets/theme.css';
+
+.fade-enter-active,
+.fade-leave-active {
+  max-height: 100%;
+  transition: opacity 0.3s ease;
+}
+.fade-enter,
+.fade-leave-to {
+  max-height: 0;
+  opacity: 0;
+}
 </style>

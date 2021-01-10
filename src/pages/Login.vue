@@ -31,7 +31,7 @@
               <button
                 class="h-12 px-10 mb-4 rounded-full bg-gray-700 focus:outline-none hover:bg-gray-300 appearance-none outline-none border-2 border-gray-800 text-gray-300 hover:text-gray-700"
               >
-                {{ $t('album.websiteManager') }}
+                {{ $t('album.homepageManager') }}
               </button>
             </router-link>
 

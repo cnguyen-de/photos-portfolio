@@ -1,6 +1,6 @@
 <template>
   <div class="text-3xl pt-20 md:pt-4 p-4 pl-4 md:pl-48 text-white flex justify-center">
-    <div class="container">
+    <div class="container h-full w-full">
       <figure v-for="photo of galleryPhotos" :key="photo.name">
         <img
           class="rounded-lg cursor-pointer hover:opacity-80"

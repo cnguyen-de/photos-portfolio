@@ -13,7 +13,7 @@
       </span>
       <span class="text-center flex-grow">{{ albumTitle }}</span>
     </div>
-    <div class="h-full w-full flex flex-row flex-wrap" v-if="albumPhotos.length !== 0">
+    <!-- <div class="h-full w-full flex flex-row flex-wrap" v-if="albumPhotos.length !== 0">
       <div v-for="photo of albumPhotos" :key="photo.id">
         <div
           class="photos__photo relative h-40 md:h-64 w-40 md:w-64 my-4 mr-4 cursor-pointer rounded-md flex items-center justify-center bg-gray-800"
@@ -27,6 +27,18 @@
           />
         </div>
       </div>
+    </div> -->
+    <div class="container" v-if="albumPhotos.length !== 0">
+      <figure v-for="photo of albumPhotos" :key="photo.name">
+        <img
+          class="rounded-lg cursor-pointer hover:opacity-80"
+          loading="lazy"
+          :src="photo.url"
+          @contextmenu.prevent=""
+          alt=""
+          @click="displayFullscreenImage(photo)"
+        />
+      </figure>
     </div>
     <div class="mt-20" v-else>This album has no photo</div>
     <PhotoViewer component="albums" v-show="isDisplayingFullscreenImage" />
@@ -68,4 +80,27 @@ export default class AlbumViewer extends Vue {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>
+<style scoped>
+.container {
+  column-count: 3;
+  column-gap: 16px;
+}
+
+figure {
+  margin: 0;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  margin-bottom: 16px;
+  break-inside: avoid;
+}
+
+figure > img {
+  grid-row: 1 / -1;
+  grid-column: 1;
+}
+@media only screen and (max-width: 768px) {
+  .container {
+    column-count: 1;
+  }
+}
+</style>

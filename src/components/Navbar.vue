@@ -30,7 +30,7 @@
       <div class="flex-grow"></div>
       <router-link to="/login">
         <button
-          class="px-4 py-2 bg-gray-800 bg-opacity-20 rounded-full hover:bg-opacity-50 mb-2 focus:outline-none"
+          class="px-4 py-2 bg-gray-800 bg-opacity-20 rounded-full hover:bg-opacity-50 mb-2 focus:outline-none text-gray-200"
           v-if="!user"
         >
           {{ $t('user.login') }}
@@ -39,7 +39,7 @@
           <img :src="user.photoURL" alt="" class="absoulte rounded-full h-full w-full object-cover" />
         </div>
       </router-link>
-      <LanguageSwitcher class="w-full px-16 lg:pb-12 pb-24" />
+      <LanguageSwitcher class="w-full px-10 lg:pb-12 pb-24" />
     </div>
 
     <div

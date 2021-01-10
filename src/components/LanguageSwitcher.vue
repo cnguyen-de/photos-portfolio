@@ -3,11 +3,11 @@
     <div class="language">
       <select
         v-model="language"
-        class="language__options block text-center appearance-none w-full bg-transparent border border-gray-300 text-gray-100 py-1 px-4 rounded leading-tight focus:outline-none focus:bg-transparent focus:border-gray-200"
+        class="language__options block text-center appearance-none w-full bg-transparent border border-gray-400 text-gray-400 py-1 px-4 rounded leading-tight focus:outline-none focus:bg-transparent focus:border-gray-200"
       >
-        <option value="en">󠁧󠁢󠁥󠁮󠁧🇬🇧</option>
-        <option value="de">🇩🇪</option>
-        <option value="vi">🇻🇳</option>
+        <option value="en">󠁧󠁢󠁥󠁮󠁧English</option>
+        <option value="de">Deutsch</option>
+        <option value="vi">Việt Nam</option>
       </select>
     </div>
   </div>

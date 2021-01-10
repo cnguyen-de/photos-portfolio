@@ -81,6 +81,7 @@ export class Firestore extends VuexModule {
   @action async createAlbum(title: string) {
     const newAlbum = {
       id: 'album' + Date.now(),
+      description: `Album Description: ${title}`,
       title,
       photos: []
     }

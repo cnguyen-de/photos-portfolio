@@ -12,7 +12,7 @@
           <img
             :src="photo.url"
             alt=""
-            class="absolute h-full w-full object-cover rounded-md"
+            class="photo absolute h-full w-full object-cover rounded-md"
             :class="{ selected: isPhotoSelected(photo) }"
             v-if="photo.url"
           />

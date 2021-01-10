@@ -9,6 +9,7 @@
           <img
             :src="album.photos[0].url"
             alt=""
+            @contextmenu.prevent=""
             class="absolute h-full w-full object-cover rounded-lg hover:opacity-80"
             v-if="album.photos.length > 0"
           />

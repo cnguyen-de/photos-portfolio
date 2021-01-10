@@ -7,7 +7,9 @@
       <div class="logo text-2xl text-white pt-10 lg:pt-24">
         <span class="hidden md:block">
           <router-link to="/" class="p-2">
-            <span class="text-base lg:text-2xl text-white">Bich Bui</span>
+            <span class="logo px-4">
+              <img class="h-10" src="logo.png" />
+            </span>
           </router-link>
         </span>
       </div>
@@ -31,7 +33,7 @@
           class="px-4 py-2 bg-gray-800 bg-opacity-20 rounded-full hover:bg-opacity-50 mb-2 focus:outline-none"
           v-if="!user"
         >
-          Login
+          {{ $t('user.login') }}
         </button>
         <div class="h-12 w-12 mb-2" v-else>
           <img :src="user.photoURL" alt="" class="absoulte rounded-full h-full w-full object-cover" />
@@ -69,7 +71,9 @@
 
       <div class="nav__logo--mobile text-xl text-white">
         <router-link to="/" class="p-2">
-          <span @click="toggleNavbar(false)">Bich Bui</span>
+          <span @click="toggleNavbar(false)">
+            <img class="h-6" src="logo.png" />
+          </span>
         </router-link>
       </div>
     </div>

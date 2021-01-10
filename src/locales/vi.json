@@ -6,6 +6,7 @@
   "intro.greet": "Xin chào, tôi là Bích Bùi. chúc mừng năm mới 2021 🎉",
   "placeholder": "Đang cập nhật!",
   "user.notLoggedIn": "Bạn chưa đăng nhập bằng tài khoản nào",
+  "user.login": "Đăng nhập",
   "user.loginWith": "Đăng nhập bằng",
   "user.logout": "Đăng xuất",
   "album.authorize": "Cho phép kết nối với Google Photos",

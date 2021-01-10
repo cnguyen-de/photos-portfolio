@@ -6,6 +6,7 @@
   "intro.greet": "Hallo! Ich bin Bich Bui. Alles Gute zum Neujahr 🎉",
   "placeholder": "Kommt bald!",
   "user.notLoggedIn": "Sie sind noch nicht eingeloggt",
+  "user.login": "Einloggen",
   "user.loginWith": "Einloggen mit",
   "user.logout": "Ausloggen",
   "album.authorize": "Zugang zu Google Photos erlauben",

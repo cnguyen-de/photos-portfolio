@@ -10,7 +10,7 @@
             :src="album.photos[0].url"
             alt=""
             @contextmenu.prevent=""
-            class="absolute h-full w-full object-cover rounded-lg hover:opacity-80"
+            class="absolute h-full w-full object-cover rounded-lg hover:opacity-80 pointer-events-none"
             v-if="album.photos.length > 0"
           />
         </div>

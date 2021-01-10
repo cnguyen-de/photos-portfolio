@@ -2,7 +2,12 @@
   <div
     class="preview fixed z-50 left-0 top-0 w-full h-full bg-black bg-opacity-90 flex justify-center focus:outline-none"
   >
-    <img :src="photo.url" alt="" @contextmenu.prevent="" class="absolute h-full w-full object-contain" />
+    <img
+      :src="photo.url"
+      alt=""
+      @contextmenu.prevent=""
+      class="absolute h-full w-full object-contain pointer-events-none"
+    />
     <button
       class="absolute mr-8 mt-8 right-0 w-12 h-12 text-white outline-none focus:outline-none hover:bg-gray-700 hover:bg-opacity-60 rounded flex items-center justify-center"
       @click="togglePreview()"

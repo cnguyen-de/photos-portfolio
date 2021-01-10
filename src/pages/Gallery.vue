@@ -3,7 +3,7 @@
     <div class="container h-full w-full">
       <figure v-for="photo of galleryPhotos" :key="photo.name">
         <img
-          class="rounded-lg cursor-pointer hover:opacity-80"
+          class="rounded-lg cursor-pointer hover:opacity-80 pointer-events-none"
           loading="lazy"
           :src="photo.url"
           @contextmenu.prevent=""

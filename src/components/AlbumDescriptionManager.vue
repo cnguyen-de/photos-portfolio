@@ -8,10 +8,20 @@
     <div class="relative h-full w-full bg-gray-800 rounded-lg" v-if="isTextAreaDisplayed">
       <textarea class="h-full w-full text-gray-200 p-4 bg-gray-800 rounded-lg" v-model="description"></textarea>
       <button
-        class="absolute bottom-0 right-0 px-3 py-1 mr-6 mb-2 bg-blue-700 hover:bg-blue-800 rounded"
+        class="absolute bottom-0 right-0 px-3 py-1 mr-20 mb-2 bg-blue-500 hover:bg-blue-700 rounded"
         @click="submitDescription()"
       >
-        ok
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
+      </button>
+      <button
+        class="absolute bottom-0 right-0 px-3 py-1 mr-6 mb-2 bg-red-500 hover:bg-red-700 rounded"
+        @click="cancelEdit()"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
       </button>
     </div>
   </div>
@@ -24,16 +34,30 @@ import { vxm } from '@/store/store.vuex'
 @Component
 export default class AlbumDescriptionManager extends Vue {
   description = ''
+  backupDescription = ''
   isTextAreaDisplayed = false
 
+  mounted() {
+    this.updateDescription()
+  }
+
   editDescription() {
-    if (this.hasEditPermission) this.isTextAreaDisplayed = true
+    if (this.hasEditPermission) {
+      this.isTextAreaDisplayed = true
+      this.backupDescription = this.description
+    }
+  }
+
+  cancelEdit() {
+    this.description = this.backupDescription
+    setTimeout(() => {
+      this.isTextAreaDisplayed = false
+    }, 50)
   }
 
   submitDescription() {
     setTimeout(() => {
       this.isTextAreaDisplayed = false
-      console.log(this.description, this.isTextAreaDisplayed)
       this.$store.dispatch('firestore/updateAlbumDescription', this.description)
     }, 50)
   }

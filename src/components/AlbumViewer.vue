@@ -11,21 +11,7 @@
       </span>
       <span class="text-center flex-grow">{{ albumTitle }}</span>
     </div>
-    <!-- <div class="h-full w-full flex flex-row flex-wrap" v-if="albumPhotos.length !== 0">
-      <div v-for="photo of albumPhotos" :key="photo.id">
-        <div
-          class="photos__photo relative h-40 md:h-64 w-40 md:w-64 my-4 mr-4 cursor-pointer rounded-md flex items-center justify-center bg-gray-800"
-        >
-          <img
-            :src="photo.url"
-            alt=""
-            class="absolute h-full w-full object-cover rounded-md"
-            v-if="photo.url"
-            @click="displayFullscreenImage(photo)"
-          />
-        </div>
-      </div>
-    </div> -->
+    <AlbumDescriptionManager class="my-4" />
     <div class="container" v-if="albumPhotos.length !== 0">
       <figure v-for="photo of albumPhotos" :key="photo.name">
         <img
@@ -45,12 +31,13 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
+import AlbumDescriptionManager from '@/components/AlbumDescriptionManager.vue'
 import { vxm } from '@/store/store.vuex'
 import fb from 'firebase/app'
 import Photo = fb.firestore.DocumentData
 import PhotoViewer from '@/components/PhotoViewer.vue'
 @Component({
-  components: { PhotoViewer }
+  components: { PhotoViewer, AlbumDescriptionManager }
 })
 export default class AlbumViewer extends Vue {
   created() {

@@ -15,6 +15,7 @@ export class Firestore extends VuexModule {
   albums: Album[] = []
   selectedAlbumTitle = ''
   albumPhotos: Photo[] = []
+  selectedAlbum: Album | undefined = undefined
 
   @action async getHomepagePhotos() {
     this.homepagePhotos = []
@@ -49,19 +50,31 @@ export class Firestore extends VuexModule {
 
   @action async getAlbumPhotos(albumId: string) {
     this.albumPhotos = []
+    this.selectedAlbum = undefined
     firebase.albums
       .doc(albumId)
       .get()
       .then(doc => {
         if (doc.exists) {
           this.updateSelectedTitle(doc.data()?.title)
-
+          this.updateSelectedAlbum(doc.data())
           if (doc.data()?.photos) {
             this.albumPhotos = doc.data()?.photos
           }
         } else {
           console.log('Cannot find album')
         }
+      })
+  }
+
+  @action async updateAlbumDescription(albumDescription: string) {
+    firebase.albums
+      .doc(this.selectedAlbum?.id)
+      .update({
+        description: albumDescription
+      })
+      .then(() => {
+        console.log('done')
       })
   }
 
@@ -79,6 +92,9 @@ export class Firestore extends VuexModule {
       this.albumPhotos.push(photo)
     }
   } */
+  @mutation updateSelectedAlbum(album: Album | undefined) {
+    this.selectedAlbum = album
+  }
 
   @mutation updateSelectedTitle(title: string) {
     this.selectedAlbumTitle = title

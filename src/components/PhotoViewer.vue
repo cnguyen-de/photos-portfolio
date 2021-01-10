@@ -16,7 +16,6 @@
 
 <script lang="ts">
 import { Component, Vue, PropSync, Watch } from 'vue-property-decorator'
-
 import fb from 'firebase/app'
 import Photo = fb.firestore.DocumentData
 import { vxm } from '@/store/store.vuex'

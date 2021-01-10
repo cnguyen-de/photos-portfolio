@@ -76,4 +76,8 @@ export class UserStore extends VuexModule {
   get getUser() {
     return this.username
   }
+
+  get hasEditPermission() {
+    return this.username?.email === 'minhchi1211@gmail.com' || this.username?.email === 'bt.bich@gmail.com'
+  }
 }

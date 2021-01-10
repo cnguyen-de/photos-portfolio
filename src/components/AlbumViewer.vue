@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="text-3xl pt-20 md:pt-4 p-4 pl-4 md:pl-48 text-white flex flex-col justify-center text-justify items-center"
-  >
+  <div class="text-3xl pt-20 md:pt-4 p-4 pl-4 md:pl-48 text-white flex flex-col text-justify">
     <div class="header relative w-full text-3xl pt-0 md:pt-4 pb-4 text-center flex">
       <span
         class="absolute top-0 left-0 p-2 mt-0 md:mt-4 hover:bg-gray-800 rounded-full cursor-pointer"

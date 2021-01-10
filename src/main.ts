@@ -4,7 +4,6 @@ import router from './router'
 import i18n from './i18n'
 import { store } from './store/store.vuex'
 import VueGApi from 'vue-gapi'
-import googlePhotos from '@/services/google-photos'
 import { setBrowserLanguage } from './services/browser-language'
 import VueSweetalert2 from 'vue-sweetalert2'
 
@@ -34,7 +33,6 @@ function fetchLanguage() {
 new Vue({
   created() {
     fetchLanguage()
-    googlePhotos.initialize(this.$gapi)
   },
   render: h => h(App),
   i18n,

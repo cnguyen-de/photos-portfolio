@@ -25,10 +25,9 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import Albums from '../components/GooglePhotosAlbum.vue'
 import { vxm } from '@/store/store.vuex'
 
-@Component({ components: { Albums } })
+@Component({})
 export default class About extends Vue {
   mounted() {
     this.$store.dispatch('firestore/getAlbums')

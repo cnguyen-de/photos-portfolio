@@ -38,14 +38,6 @@ export const routes = [
     component: () => import('@/pages/Login.vue')
   },
   {
-    path: '/googlephotos-manager',
-    name: 'googlephotos-manager',
-    component: () => import('@/pages/PhotosManager.vue'),
-    meta: {
-      requiresAuth: true
-    }
-  },
-  {
     path: '/photos-manager',
     name: 'photos-manager',
     component: () => import('@/pages/HomepageManager.vue'),

@@ -5,27 +5,26 @@
         class="relative h-40 md:h-64 w-40 md:w-64 my-4 mr-4 cursor-pointer rounded-md flex items-center justify-center bg-gray-800"
         :class="{ ' border-4 border-blue-400': isAlbumSelected(album) }"
       >
-        <Check class="absolute left-0 top-0 mt-1 ml-1 z-50" v-if="isAlbumSelected(album)" />
+        <Check class="absolute left-0 top-0 mt-3 ml-3 z-50" v-if="isAlbumSelected(album)" />
         <img
           :src="album.photos[0].url"
           alt=""
           class="album absolute h-full w-full object-cover rounded-md"
           :class="{ selected: isAlbumSelected(album) }"
           v-if="album.photos.length > 0"
+          @click="unselectAlbum(album)"
         />
-        <div class="options absolute h-full w-full opacity-0 hover:opacity-100 rounded-md">
+        <div
+          class="options absolute h-full w-full opacity-0 hover:opacity-100 rounded-md"
+          v-show="!isAlbumSelected(album)"
+        >
           <div
-            class="h-1/2 bg-blue-400 bg-opacity-10 hover:bg-opacity-30 flex justify-center items-center rounded-t-md"
+            class="options__select h-1/3 w-1/3 bg-gray-900 bg-opacity-30 hover:bg-opacity-60 flex justify-start items-start rounded-t-md"
             @click="selectAlbum(album)"
           >
-            Select
+            <Check class="mt-3 ml-3" />
           </div>
-          <div
-            class="h-1/2 bg-green-400 bg-opacity-10 hover:bg-opacity-30 flex justify-center items-center rounded-b-md"
-            @click="openAlbum(album.id)"
-          >
-            Open
-          </div>
+          <div class="options__open absolute h-full w-full top-0 rounded-md" @click="openAlbum(album.id)"></div>
         </div>
       </div>
       <div class="albums__album-info text-sm mr-4 text-center">
@@ -84,10 +83,15 @@ export default class AlbumManager extends Vue {
   }
 
   selectAlbum(album: Album) {
-    console.log(album)
     if (!this.isAlbumSelected(album)) {
       this.selectedAlbums.push(album)
     } else {
+      this.unselectAlbum(album)
+    }
+  }
+
+  unselectAlbum(album: Album) {
+    if (this.isAlbumSelected(album)) {
       const index = this.selectedAlbums.indexOf(album)
       if (index > -1) {
         this.selectedAlbums.splice(index, 1)
@@ -100,7 +104,6 @@ export default class AlbumManager extends Vue {
   }
 
   deleteAlbums() {
-    console.log('delete', this.selectedAlbums)
     this.selectedAlbums.forEach((album, index) => {
       firebase.albums
         .doc(album.id)
@@ -149,6 +152,12 @@ export default class AlbumManager extends Vue {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.options__select {
+  clip-path: polygon(0 0, 100% 0%, 0% 100%, 0 100%);
+}
+.options__open {
+  clip-path: polygon(33% 0%, 100% 0%, 100% 100%, 0 100%, 0 33%);
+}
 .album {
   transform: scale(1);
   transition: all 0.1s ease-in-out;

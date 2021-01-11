@@ -1,11 +1,22 @@
 <template>
   <div
-    class="min-h-20 bg-gray-800 bg-opacity-50 hover:bg-opacity-80 text-gray-300 text-base rounded-lg cursor-pointer"
+    class="relative min-h-20 bg-gray-800 bg-opacity-50 hover:bg-opacity-80 text-gray-300 text-base rounded-lg"
+    :class="{ ' cursor-pointer': hasEditPermission }"
     @click="editDescription()"
   >
-    <div class="p-4 h-20 whitespace-pre" v-show="!isTextAreaDisplayed">{{ description }}</div>
+    <div class="p-4 h-full whitespace-pre" v-show="!isTextAreaDisplayed">{{ description }}</div>
+    <span class="absolute top-0 right-0 mr-2 mt-2" v-if="hasEditPermission">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+        ></path>
+      </svg>
+    </span>
 
-    <div class="relative h-full w-full bg-gray-800 rounded-lg" v-if="isTextAreaDisplayed">
+    <div class="relative h-40 w-full bg-gray-800 rounded-lg" v-if="isTextAreaDisplayed">
       <textarea class="h-full w-full text-gray-200 p-4 bg-gray-800 rounded-lg" v-model="description"></textarea>
       <button
         class="absolute bottom-0 right-0 px-3 py-1 mr-20 mb-2 bg-blue-500 hover:bg-blue-700 rounded"

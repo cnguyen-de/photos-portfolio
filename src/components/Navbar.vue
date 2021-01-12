@@ -71,8 +71,8 @@
         </svg>
       </button>
 
-      <div class="nav__logo--mobile text-xl text-white">
-        <router-link to="/" class="p-2">
+      <div class="nav__logo--mobile text-xl text-white my-auto h-8 p-1">
+        <router-link to="/">
           <span @click="toggleNavbar(false)">
             <img class="h-6" src="logo.png" />
           </span>

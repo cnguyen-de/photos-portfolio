@@ -17,7 +17,12 @@
     </span>
 
     <div class="relative h-40 w-full bg-gray-800 rounded-lg" v-if="isTextAreaDisplayed">
-      <textarea class="h-full w-full text-gray-200 p-4 bg-gray-800 rounded-lg" v-model="description"></textarea>
+      <textarea
+        autofocus
+        class="h-full w-full text-gray-200 p-4 bg-gray-800 rounded-lg"
+        v-model="description"
+        id="edit"
+      ></textarea>
       <button
         class="absolute bottom-0 right-0 px-3 py-1 mr-20 mb-2 bg-blue-500 hover:bg-blue-700 rounded"
         @click="submitDescription()"
@@ -56,6 +61,9 @@ export default class AlbumDescriptionManager extends Vue {
     if (this.hasEditPermission) {
       this.isTextAreaDisplayed = true
       this.backupDescription = this.description
+      setTimeout(() => {
+        document.getElementById('edit')?.focus()
+      }, 50)
     }
   }
 

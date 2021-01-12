@@ -61,7 +61,7 @@
           d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
         ></path>
       </svg>
-      <button>Delete selected albums</button>
+      <button>{{ $t('album.albumDeleteAction') }}</button>
     </div>
   </div>
 </template>
@@ -110,14 +110,14 @@ export default class AlbumManager extends Vue {
         .delete()
         .then(() => {
           if (index === this.selectedAlbums.length - 1) {
-            this.selectedAlbums = []
             this.$store.dispatch('firestore/getAlbums')
             this.$swal({
               position: 'bottom',
-              text: 'Album deleted',
+              text: this.$tc('album.albumDeleted', this.selectedAlbums.length),
               showConfirmButton: false,
               timer: 1500
             })
+            this.selectedAlbums = []
           }
         })
     })

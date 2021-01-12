@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="m-0 min-h-screen">
     <Navbar />
     <div class="content min-h-screen min-w-screen bg-gray-900 select-none">
       <transition name="fade" mode="out-in">

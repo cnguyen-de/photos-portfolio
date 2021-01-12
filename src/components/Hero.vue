@@ -79,7 +79,10 @@ export default class Hero extends Vue {
 
   navigateStories(direction: string, force = false) {
     this.isDisplayingArrows = false
-
+    if (typeof this.arrayStory[this.index] === 'undefined') {
+      clearInterval(this.autoScroll)
+      return
+    }
     if (direction === 'next') {
       if (this.index < this.arrayStory.length - 1) {
         this.index++

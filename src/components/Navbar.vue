@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <div
-      class="nav nav--desktop fixed left-0 md:visible md:opacity-100 text-white bg-opacity-50 z-50 flex bg-gradient-to-r from-transBlack to-transparent min-h-screen md:w-48 md:flex flex-col justify-between items-center"
+      class="nav nav--desktop fixed left-0 md:visible md:opacity-100 text-white bg-opacity-50 z-50 flex bg-gradient-to-r from-transBlack to-transparent h-screen md:w-48 md:flex flex-col justify-between items-center"
       :class="{ 'invisible w-20 opacity-0': !isNavbarDisplayed, 'visible w-52 opacity-100': isNavbarDisplayed }"
     >
       <div class="logo text-2xl text-white pt-10 lg:pt-24">
@@ -39,7 +39,7 @@
           <img :src="user.photoURL" alt="" class="absoulte rounded-full h-full w-full object-cover" />
         </div>
       </router-link>
-      <LanguageSwitcher class="w-full px-10 lg:pb-12 pb-24" />
+      <LanguageSwitcher class="w-full px-10 lg:pb-12 pb-32" />
     </div>
 
     <div

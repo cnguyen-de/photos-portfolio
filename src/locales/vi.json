@@ -16,6 +16,6 @@
   "album.photo": "ảnh",
   "album.photoDeleted": "{0} ảnh đã xóa ",
   "album.albumDeleted": "{0} tập ảnh đã xóa",
-  "album.albumDeleteAction": "Xóa ảnh được chọn",
-  "album.photoDeleteAction": "Xóa album được chọn"
+  "album.albumDeleteAction": "Xóa album được chọn",
+  "album.photoDeleteAction": "Xóa ảnh được chọn"
 }

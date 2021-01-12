@@ -1,5 +1,5 @@
 <template>
-  <div class="text-3xl pt-20 md:pt-4 p-4 pl-4 md:pl-48 text-white flex">
+  <div class="text-3xl pt-20 md:pt-4 p-4 pl-4 md:pl-48 text-white flex justify-center md:justify-start">
     <div class="container h-full w-full">
       <figure v-for="photo of galleryPhotos" :key="photo.name">
         <img
@@ -12,19 +12,21 @@
         />
       </figure>
     </div>
-    <PhotoViewer component="gallery" v-show="isDisplayingFullscreenImage" />
+    <transition name="zoom">
+      <FullscreenPhotoViewer component="gallery" v-if="isDisplayingFullscreenImage" />
+    </transition>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import { vxm } from '@/store/store.vuex'
-import PhotoViewer from '@/components/PhotoViewer.vue'
+import FullscreenPhotoViewer from '@/components/FullscreenPhotoViewer.vue'
 import fb from 'firebase/app'
 import Photo = fb.firestore.DocumentData
 
 @Component({
-  components: { PhotoViewer }
+  components: { FullscreenPhotoViewer }
 })
 export default class Gallery extends Vue {
   mounted() {
@@ -68,6 +70,21 @@ figure > img {
 @media only screen and (max-width: 768px) {
   .container {
     column-count: 1;
+  }
+}
+
+.zoom-enter-active {
+  animation: zoom-in 0.3s ease-in-out;
+}
+.zoom-leave-active {
+  animation: zoom-in 0.5s reverse ease-in-out;
+}
+@keyframes zoom-in {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
   }
 }
 </style>

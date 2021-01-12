@@ -1,10 +1,11 @@
 <template>
   <div
-    class="preview fixed z-50 left-0 top-0 w-full h-full bg-black bg-opacity-90 flex justify-center focus:outline-none"
+    class="preview fixed z-50 left-0 top-0 w-full h-full bg-black bg-opacity-90 flex items-center justify-center focus:outline-none"
   >
-    <img :src="photo.url" alt="" @contextmenu.prevent="" class="absolute h-full w-full object-contain" />
+    <div class="absolute h-full w-full" @click="togglePreview()"></div>
+    <img :src="photo.url" alt="" @contextmenu.prevent="" class="absolute max-w-full max-h-full" />
     <button
-      class="absolute mr-8 mt-8 right-0 w-12 h-12 text-white outline-none focus:outline-none hover:bg-gray-700 hover:bg-opacity-60 rounded flex items-center justify-center"
+      class="absolute mr-8 mt-8 top-0 right-0 w-12 h-12 text-white outline-none focus:outline-none hover:bg-gray-700 hover:bg-opacity-60 rounded flex items-center justify-center"
       @click="togglePreview()"
     >
       <svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5">

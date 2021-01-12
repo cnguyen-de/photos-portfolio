@@ -1,5 +1,7 @@
 <template>
-  <div class="text-3xl pt-20 md:pt-4 p-4 pl-4 md:pl-48 text-white flex flex-col text-justify">
+  <div
+    class="text-3xl pt-20 md:pt-4 p-4 pl-4 md:pl-48 text-white flex flex-col text-justify justify-center md:justify-start"
+  >
     <div class="header relative w-full text-3xl pt-0 md:pt-4 pb-4 text-center flex focus:outline-none">
       <span
         class="absolute top-0 left-0 p-2 md:p-3 mt-0 md:mt-2 hover:bg-gray-800 rounded-full cursor-pointer"
@@ -18,7 +20,7 @@
       <span class="text-center flex-grow">{{ albumTitle }}</span>
     </div>
     <AlbumDescriptionManager class="my-4" />
-    <div class="container" v-if="albumPhotos.length !== 0">
+    <div class="container h-full w-full" v-if="albumPhotos.length !== 0">
       <figure v-for="photo of albumPhotos" :key="photo.name">
         <img
           class="rounded-lg cursor-pointer hover:opacity-80"
@@ -31,7 +33,9 @@
       </figure>
     </div>
     <div class="mt-20" v-else>This album has no photo</div>
-    <PhotoViewer component="albums" v-show="isDisplayingFullscreenImage" />
+    <transition name="zoom">
+      <FullscreenPhotoViewer component="albums" v-if="isDisplayingFullscreenImage" />
+    </transition>
   </div>
 </template>
 
@@ -41,9 +45,9 @@ import AlbumDescriptionManager from '@/components/AlbumDescriptionManager.vue'
 import { vxm } from '@/store/store.vuex'
 import fb from 'firebase/app'
 import Photo = fb.firestore.DocumentData
-import PhotoViewer from '@/components/PhotoViewer.vue'
+import FullscreenPhotoViewer from '@/components/FullscreenPhotoViewer.vue'
 @Component({
-  components: { PhotoViewer, AlbumDescriptionManager }
+  components: { FullscreenPhotoViewer, AlbumDescriptionManager }
 })
 export default class AlbumViewer extends Vue {
   created() {
@@ -92,6 +96,21 @@ figure > img {
 @media only screen and (max-width: 768px) {
   .container {
     column-count: 1;
+  }
+}
+
+.zoom-enter-active {
+  animation: zoom-in 0.3s ease-in-out;
+}
+.zoom-leave-active {
+  animation: zoom-in 0.5s reverse ease-in-out;
+}
+@keyframes zoom-in {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
   }
 }
 </style>

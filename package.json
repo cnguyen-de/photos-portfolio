@@ -5,7 +5,7 @@
   "author": "Chi Nguyen @ cnguyen.de",
   "description": "Photos Portfolio for Bich Bui",
   "scripts": {
-    "serve": "vue-cli-service serve --host 0.0.0.0 --port 3000",
+    "serve": "vue-cli-service serve --host localhost --port 3000",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
@@ -23,6 +23,7 @@
     "vue-class-component": "^7.2.6",
     "vue-gapi": "^1.0.0",
     "vue-i18n": "^8.17.3",
+    "vue-js-modal": "^2.0.0-rc.6",
     "vue-property-decorator": "^9.1.2",
     "vue-router": "^3.4.9",
     "vue-sweetalert2": "^4.1.1",

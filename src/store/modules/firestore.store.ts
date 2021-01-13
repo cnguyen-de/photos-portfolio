@@ -27,6 +27,17 @@ export class Firestore extends VuexModule {
     })
   }
 
+  @action async addHomepagePhotos(photo: Photo, url?: string) {
+    if (typeof url === 'undefined') {
+      // add existed photo
+      firebase.homepage.doc(photo.id).set(photo)
+    } else {
+      // add just uploaded photo
+      const id = 'photo' + Date.now()
+      firebase.homepage.doc(id).set({ id, name: photo.name, url })
+    }
+  }
+
   @action async getGalleryPhotos() {
     this.galleryPhotos = []
     firebase.gallery.get().then(querySnapshot => {
@@ -35,6 +46,17 @@ export class Firestore extends VuexModule {
         this.addGalleryPhoto(doc.data())
       })
     })
+  }
+
+  @action async addGalleryPhotos(photo: Photo, url?: string) {
+    if (typeof url === 'undefined') {
+      // add existed photo
+      firebase.gallery.doc(photo.id).set(photo)
+    } else {
+      // add just uploaded photo
+      const id = 'photo' + Date.now()
+      firebase.gallery.doc(id).set({ id, name: photo.name, url })
+    }
   }
 
   @action async getAlbums() {
@@ -89,7 +111,7 @@ export class Firestore extends VuexModule {
   }
 
   /*   @mutation addSelectedAlbumPhoto(photo: Photo) {
-    if (!this.albumPhotos.some(photoInArray => photoInArray.name === photo.name)) {
+    if (!this.albumPhotos.some(photoInArray => photoInArray.id === photo.id)) {
       this.albumPhotos.push(photo)
     }
   } */
@@ -108,13 +130,13 @@ export class Firestore extends VuexModule {
   }
 
   @mutation addGalleryPhoto(photo: Photo) {
-    if (!this.galleryPhotos.some(photoInArray => photoInArray.name === photo.name)) {
+    if (!this.galleryPhotos.some(photoInArray => photoInArray.id === photo.id)) {
       this.galleryPhotos.push(photo)
     }
   }
 
   @mutation addHomepagePhoto(photo: Photo) {
-    if (!this.homepagePhotos.some(photoInArray => photoInArray.name === photo.name)) {
+    if (!this.homepagePhotos.some(photoInArray => photoInArray.id === photo.id)) {
       this.homepagePhotos.push(photo)
     }
   }

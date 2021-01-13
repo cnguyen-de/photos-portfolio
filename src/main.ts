@@ -5,12 +5,15 @@ import i18n from './i18n'
 import { store } from './store/store.vuex'
 import VueGApi from 'vue-gapi'
 import { setBrowserLanguage } from './services/browser-language'
+import vmodal from 'vue-js-modal'
 import VueSweetalert2 from 'vue-sweetalert2'
-
-// If you don't need the styles, do not connect
-import 'sweetalert2/dist/sweetalert2.min.css'
-
 Vue.use(VueSweetalert2)
+Vue.use(vmodal, {
+  dynamicDefaults: {
+    //width: 'auto',
+    height: 'auto'
+  }
+})
 
 Vue.config.productionTip = false
 

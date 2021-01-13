@@ -14,6 +14,8 @@
   "album.homepageManager": "Webseite-Manager",
   "album.openNewTab": "Album {0} in neuen Tab öffnen",
   "album.photo": "Foto | Fotos",
+  "album.uploadPhoto": "Neue Fotos Hochladen",
+  "album.addPhoto": "Vorhandene Fotos auswählen",
   "album.photoDeleted": "{0} Foto wurde gelöscht | Fotos wurden gelöscht",
   "album.albumDeleted": "{0} Album wurde gelöscht | Alben wurden gelöscht",
   "album.albumDeleteAction": "Ausgewählte Alben löschen",

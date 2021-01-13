@@ -18,7 +18,7 @@
           />
         </div>
       </div>
-      <div v-for="(photo, index) of previewPhotos" :key="photo.name" :class="{ hidden: previewPhotos.length === 0 }">
+      <div v-for="(photo, index) of previewPhotos" :key="photo.id" :class="{ hidden: previewPhotos.length === 0 }">
         <div
           class="photos__preview-photo relative h-40 md:h-64 w-40 md:w-64 my-4 mr-4 cursor-pointer rounded-md flex justify-center items-center bg-gray-800"
         >
@@ -38,8 +38,9 @@
           />
         </div>
       </div>
+
       <div
-        class="photos__upload relative h-40 md:h-64 w-40 md:w-64 my-4 mr-4 cursor-pointer rounded-md flex items-center justify-center bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-gray-100"
+        class="photos__upload relative h-40 md:h-64 w-40 md:w-64 my-4 mr-4 cursor-pointer rounded-md flex flex-col items-center justify-center bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-gray-100"
         @click="$refs.fileUpload.click()"
       >
         <input
@@ -51,9 +52,49 @@
           accept="image/*"
           @change="onFileChange($event)"
         />
-        <svg class="h-10 w-10" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+          ></path>
+        </svg>
+        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+          ></path>
+        </svg>
+        <span class="mt-4 text-sm">{{ $t('album.uploadPhoto') }}</span>
+      </div>
+      <div
+        class="photos__upload relative h-40 md:h-64 w-40 md:w-64 my-4 mr-4 cursor-pointer rounded-md flex flex-col items-center justify-center bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-gray-100"
+        @click="addFile()"
+        v-if="currentComponent !== 'albums'"
+      >
+        <svg class="h-6 w-6 mt-1" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M7.5 1v13M1 7.5h13" stroke="currentColor"></path>
         </svg>
+        <div class="overlay absolute h-full w-full flex flex-col items-center justify-center">
+          <svg
+            class="w-24 h-24"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"
+            ></path>
+          </svg>
+        </div>
+        <span class="absolute top-40 mt-4 text-sm">{{ $t('album.addPhoto') }}</span>
       </div>
 
       <div
@@ -91,9 +132,10 @@ import FieldValue = fb.firestore.FieldValue
 import Photo = fb.firestore.DocumentData
 import { PhotoUpload } from '../types/PhotoUpload'
 import { vxm } from '@/store/store.vuex'
+import PhotoChooser from './PhotoChooser.vue'
 
 @Component({
-  components: { Check, AlbumDescriptionManager }
+  components: { Check, AlbumDescriptionManager, PhotoChooser }
 })
 export default class Albums extends Vue {
   previewPhotos: PhotoUpload[] = []
@@ -106,6 +148,14 @@ export default class Albums extends Vue {
   created() {
     this.$store.dispatch('app/setSelectedPhotoManagerComponent', 'albums')
     this.updateValues()
+  }
+
+  addFile() {
+    this.$modal.show(PhotoChooser, { componentName: 'add' }, {}, { 'before-close': this.beforeModalClose })
+  }
+
+  beforeModalClose() {
+    this.$store.dispatch(this.getFirestorePhotosAction, this.getFirestorePhotosActionParam)
   }
 
   onFileChange() {
@@ -127,10 +177,10 @@ export default class Albums extends Vue {
           storageRef.snapshot.ref.getDownloadURL().then(url => {
             this.previewPhotos[index].url = url
             if (this.currentComponent !== 'albums') {
-              this.firebaseTarget.doc(file.name).set({ name: file.name, url })
+              this.firebaseTarget.doc(file.name).set({ id: 'photo' + Date.now(), name: file.name, url })
             } else {
               this.firebaseTarget.doc(this.getFirestorePhotosActionParam).update({
-                photos: FieldValue.arrayUnion({ name: file.name, url: url })
+                photos: FieldValue.arrayUnion({ id: 'photo' + Date.now(), name: file.name, url: url })
               })
             }
             if (index === files.length - 1) {
@@ -154,7 +204,7 @@ export default class Albums extends Vue {
     if (this.currentComponent !== 'albums') {
       this.selected.forEach((photo, index) => {
         this.firebaseTarget
-          .doc(photo?.name)
+          .doc(photo?.id)
           .delete()
           .then(() => {
             if (index === this.selected.length - 1) {
@@ -174,7 +224,7 @@ export default class Albums extends Vue {
         this.firebaseTarget
           .doc(this.getFirestorePhotosActionParam)
           .update({
-            photos: FieldValue.arrayRemove({ name: photo.name, url: photo.url })
+            photos: FieldValue.arrayRemove({ id: photo.id, name: photo.name, url: photo.url })
           })
           .then(() => {
             if (index === this.selected.length - 1) {

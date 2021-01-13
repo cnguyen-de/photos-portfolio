@@ -14,6 +14,8 @@
   "album.homepageManager": "Quản lý trang chủ",
   "album.openNewTab": "Mở tập ảnh {0} trong tab mới",
   "album.photo": "ảnh",
+  "album.uploadPhoto": "Thêm ảnh mới từ máy tính",
+  "album.addPhoto": "Chọn ảnh có sẵn",
   "album.photoDeleted": "{0} ảnh đã xóa ",
   "album.albumDeleted": "{0} tập ảnh đã xóa",
   "album.albumDeleteAction": "Xóa album được chọn",

@@ -14,6 +14,8 @@
   "album.homepageManager": "Website Manager",
   "album.openNewTab": "Open {0} album in new tab",
   "album.photo": "photo | photos",
+  "album.uploadPhoto": "Upload new photos",
+  "album.addPhoto": "Choose existed photos",
   "album.photoDeleted": "{0} photo deleted | photos deleted",
   "album.albumDeleted": "{0} album deleted | albums deleted",
   "album.albumDeleteAction": "Delete selected albums",

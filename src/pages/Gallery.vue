@@ -74,10 +74,10 @@ figure > img {
 }
 
 .zoom-enter-active {
-  animation: zoom-in 0.3s ease-in-out;
+  animation: zoom-in 0.15s ease-in-out;
 }
 .zoom-leave-active {
-  animation: zoom-in 0.5s reverse ease-in-out;
+  animation: zoom-in 0.15s reverse ease-in-out;
 }
 @keyframes zoom-in {
   0% {

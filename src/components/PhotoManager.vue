@@ -167,11 +167,13 @@ export default class Albums extends Vue {
         () => {
           storageRef.snapshot.ref.getDownloadURL().then(url => {
             this.previewPhotos[index].url = url
+            const id = 'photo' + Date.now()
+
             if (this.currentComponent !== 'albums') {
-              this.firebaseTarget.doc(file.name).set({ id: 'photo' + Date.now(), name: file.name, url })
+              this.firebaseTarget.doc(id).set({ id, name: file.name, url })
             } else {
               this.firebaseTarget.doc(this.getFirestorePhotosActionParam).update({
-                photos: FieldValue.arrayUnion({ id: 'photo' + Date.now(), name: file.name, url: url })
+                photos: FieldValue.arrayUnion({ id, name: file.name, url: url })
               })
             }
             if (index === files.length - 1) {

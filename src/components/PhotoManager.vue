@@ -68,33 +68,25 @@
             d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
           ></path>
         </svg>
-        <span class="mt-4 text-sm">{{ $t('album.uploadPhoto') }}</span>
+        <span class="mt-4 text-sm text-center">{{ $t('album.uploadPhoto') }}</span>
       </div>
       <div
         class="photos__upload relative h-40 md:h-64 w-40 md:w-64 my-4 mr-4 cursor-pointer rounded-md flex flex-col items-center justify-center bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-gray-100"
         @click="addFile()"
         v-if="currentComponent !== 'albums'"
       >
-        <svg class="h-6 w-6 mt-1" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg class="h-8 w-8" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M7.5 1v13M1 7.5h13" stroke="currentColor"></path>
         </svg>
-        <div class="overlay absolute h-full w-full flex flex-col items-center justify-center">
-          <svg
-            class="w-24 h-24"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"
-            ></path>
-          </svg>
-        </div>
-        <span class="absolute top-40 mt-4 text-sm">{{ $t('album.addPhoto') }}</span>
+        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"
+          ></path>
+        </svg>
+        <span class="mt-4 text-sm text-center">{{ $t('album.addPhoto') }}</span>
       </div>
 
       <div
@@ -151,7 +143,7 @@ export default class Albums extends Vue {
   }
 
   addFile() {
-    this.$modal.show(PhotoChooser, { componentName: 'add' }, {}, { 'before-close': this.beforeModalClose })
+    this.$modal.show(PhotoChooser, { width: 300, height: 300 }, { 'before-close': this.beforeModalClose })
   }
 
   beforeModalClose() {

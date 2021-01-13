@@ -1,5 +1,5 @@
 <template>
-  <div class="max-h-full min-w-md w-full overflow-auto p-4 bg-gray-800 text-gray-200">
+  <div class="min-w-sm w-full overflow-auto p-4 bg-gray-800 text-gray-200">
     <div
       class="accordion w-full p-3 text-xl cursor-pointer bg-gray-900 hover:bg-opacity-50 rounded-md mb-2"
       v-for="album of albums"

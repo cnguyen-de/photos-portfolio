@@ -29,7 +29,7 @@
             </router-link>
 
             <button
-              class="h-12 px-10 mb-4 rounded-full bg-red-500 focus:outline-none hover:bg-red-600 appearance-none outline-none text-gray-300 hover:text-gray-200"
+              class="h-12 px-10 mb-4 ml-2 rounded-full bg-red-500 focus:outline-none hover:bg-red-600 appearance-none outline-none text-gray-300 hover:text-gray-200"
               @click="logout()"
             >
               {{ $t('user.logout') }}

@@ -10,7 +10,7 @@ import VueSweetalert2 from 'vue-sweetalert2'
 Vue.use(VueSweetalert2)
 Vue.use(vmodal, {
   dynamicDefaults: {
-    //width: 'auto',
+    adaptive: true,
     height: 'auto'
   }
 })

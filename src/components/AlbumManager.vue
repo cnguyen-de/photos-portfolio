@@ -101,6 +101,7 @@ export default class AlbumManager extends Vue {
 
   openAlbum(albumId: string) {
     this.$router.push(`/photos-manager/albums/${albumId}`)
+    this.$store.dispatch('app/setSelectedPhotoManagerComponent', 'albums')
   }
 
   deleteAlbums() {

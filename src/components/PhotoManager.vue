@@ -138,7 +138,6 @@ export default class Albums extends Vue {
   photos: Photo[] = []
 
   created() {
-    this.$store.dispatch('app/setSelectedPhotoManagerComponent', 'albums')
     this.updateValues()
   }
 

@@ -20,13 +20,12 @@
             {{ user.displayName }}
           </div>
           <div class="login__actions">
-            <router-link to="/photos-manager" v-if="hasEditPermission">
-              <button
-                class="h-12 px-10 mb-4 rounded-full bg-gray-700 focus:outline-none hover:bg-gray-300 appearance-none outline-none border-2 border-gray-800 text-gray-300 hover:text-gray-700"
-              >
-                {{ $t('album.manager') }}
-              </button>
-            </router-link>
+            <button
+              class="h-12 px-10 mb-4 rounded-full bg-gray-700 focus:outline-none hover:bg-gray-300 appearance-none outline-none border-2 border-gray-800 text-gray-300 hover:text-gray-700"
+              @click="goToHomepage()"
+            >
+              {{ $t('album.manager') }}
+            </button>
 
             <button
               class="h-12 px-10 mb-4 ml-2 rounded-full bg-red-500 focus:outline-none hover:bg-red-600 appearance-none outline-none text-gray-300 hover:text-gray-200"
@@ -54,6 +53,11 @@ export default class Login extends Vue {
 
   logout() {
     this.$store.dispatch('user/' + USER_LOGOUT)
+  }
+
+  goToHomepage() {
+    this.$router.push('/photos-manager/homepage')
+    this.$store.dispatch('app/setSelectedPhotoManagerComponent', 'homepage')
   }
 
   get user() {

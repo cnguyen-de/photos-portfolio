@@ -9,7 +9,7 @@
         <span class="hidden md:block">
           <router-link to="/" class="p-2">
             <span class="logo px-4">
-              <img class="h-10" src="logo.png" />
+              <img class="h-10" :src="logoSrc" />
             </span>
           </router-link>
         </span>
@@ -74,7 +74,7 @@
       <div class="nav__logo--mobile text-xl text-white my-auto h-8 p-1">
         <router-link to="/">
           <span @click="toggleNavbar(false)">
-            <img class="h-6" src="logo.png" />
+            <img class="h-6" :src="logoSrc" />
           </span>
         </router-link>
       </div>
@@ -92,6 +92,8 @@ import { vxm } from '@/store/store.vuex'
   components: { LanguageSwitcher }
 })
 export default class Navbar extends Vue {
+  logoSrc =
+    'https://firebasestorage.googleapis.com/v0/b/photos-portfolio-300318.appspot.com/o/logo.png?alt=media&token=6c587bd0-e754-4a78-b26e-f355aa39d89b'
   isNavbarDisplayed = false
 
   toggleNavbar(state?: boolean) {

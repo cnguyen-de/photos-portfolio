@@ -1,5 +1,5 @@
 <template>
-  <div class="text-3xl pt-20 md:pt-4 p-4 pl-4 md:pl-48 text-white flex flex-col justify-center">
+  <div class="text-3xl pt-20 md:pt-4 p-4 pl-4 md:pl-48 text-white flex justify-center md:justify-start">
     <div class="h-full w-full flex flex-row flex-wrap">
       <div v-for="album of albums" :key="album.title">
         <div

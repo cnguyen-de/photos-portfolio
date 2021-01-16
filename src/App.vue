@@ -1,7 +1,7 @@
 <template>
-  <div id="app" class="m-0 min-h-screen">
-    <Navbar />
+  <div id="app">
     <div class="content min-h-screen min-w-screen bg-gray-900 select-none">
+      <Navbar />
       <transition name="fade" mode="out-in">
         <router-view />
       </transition>

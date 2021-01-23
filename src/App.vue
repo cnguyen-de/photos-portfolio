@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="content min-h-screen min-w-screen bg-gray-900 select-none">
+    <div class="content min-h-screen min-w-screen bg-gray-900 select-none" style="min-height: -webkit-fill-available">
       <Navbar />
       <transition name="fade" mode="out-in">
         <router-view />

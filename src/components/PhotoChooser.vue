@@ -1,11 +1,11 @@
 <template>
   <div class="min-w-sm w-full h-screen overflow-auto p-4 bg-gray-800 text-gray-200">
     <div
-      class="accordion w-full p-3 text-xl cursor-pointer bg-gray-900 hover:bg-opacity-50 rounded-md mb-2"
+      class="accordion w-full p-3 text-xl cursor-pointer bg-gray-900 rounded-md mb-2"
       v-for="album of albums"
       :key="album.id"
     >
-      <div @click="displayPhotos(album.id)">
+      <div class="hover:bg-gray-800" @click="displayPhotos(album.id)">
         <span class="tracking-wide">{{ album.title }}</span>
         <span class="ml-2 text-base font-thin">
           {{ album.photos.length }} {{ $tc('album.photo', album.photos.length) }}
@@ -79,7 +79,11 @@ export default class PhotoChooser extends Vue {
   }
 
   displayPhotos(albumId: string) {
-    this.isDisplayingAlbumId = albumId
+    if (albumId === this.isDisplayingAlbumId) {
+      this.isDisplayingAlbumId = ''
+    } else {
+      this.isDisplayingAlbumId = albumId
+    }
   }
 
   cancel() {

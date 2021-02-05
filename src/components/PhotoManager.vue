@@ -18,6 +18,7 @@
           />
         </div>
       </div>
+
       <div v-for="(photo, index) of previewPhotos" :key="photo.id" :class="{ hidden: previewPhotos.length === 0 }">
         <div
           class="photos__preview-photo relative h-40 md:h-64 w-40 md:w-64 my-4 mr-4 cursor-pointer rounded-md flex justify-center items-center bg-gray-800"
@@ -70,8 +71,9 @@
         </svg>
         <span class="mt-4 text-sm text-center">{{ $t('album.uploadPhoto') }}</span>
       </div>
+
       <div
-        class="photos__upload relative h-40 md:h-64 w-40 md:w-64 my-4 mr-4 cursor-pointer rounded-md flex flex-col items-center justify-center bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-gray-100"
+        class="photos__add-existed-photo relative h-40 md:h-64 w-40 md:w-64 my-4 mr-4 cursor-pointer rounded-md flex flex-col items-center justify-center bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-gray-100"
         @click="addFile()"
         v-if="currentComponent !== 'albums'"
       >

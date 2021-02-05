@@ -1,6 +1,9 @@
 <template>
   <div class="relative min-h-screen text-3xl pt-20 md:pt-4 p-4 pl-4 md:pl-48 text-white flex flex-col">
-    <div class="relative pb-4 text-center">{{ $t('album.manager') }} {{ currentAlbum }}</div>
+    <div class="relative pb-4 text-center">
+      {{ $t('album.manager') }}
+      <span v-if="currentAlbum !== ''">/ {{ currentAlbum }}</span>
+    </div>
     <div class="w-full bg-gray-800 p-2 text-base md:text-xl">
       <router-link class="mr-3" to="/photos-manager/homepage">
         <button

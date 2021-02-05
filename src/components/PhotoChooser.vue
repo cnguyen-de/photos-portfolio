@@ -120,4 +120,13 @@ export default class PhotoChooser extends Vue {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>
+<style scoped>
+.photo {
+  transform: scale(1);
+  transition: all 0.1s ease-in-out;
+}
+.selected {
+  transform: scale(0.9);
+  transition: all 0.1s ease-in-out;
+}
+</style>

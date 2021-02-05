@@ -6,6 +6,7 @@
   "intro.greet": "Hi! I'm Bich Bui. Happy New Year! 🎉",
   "placeholder": "Coming Soon!",
   "user.notLoggedIn": "You're not logged in",
+  "user.welcome": "Welcome",
   "user.login": "Login",
   "user.loginWith": "Login with",
   "user.logout": "Logout",

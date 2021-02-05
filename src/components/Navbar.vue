@@ -37,8 +37,12 @@
         >
           {{ $t('user.login') }}
         </button>
-        <div class="h-12 w-12 mb-2" v-else>
-          <img :src="user.photoURL" alt="" class="absoulte rounded-full h-full w-full object-cover" />
+        <div class="relative h-12 w-12 mb-4" v-else>
+          <div
+            class="rounded-full absolute bg-white bg-opacity-70"
+            style="height: 3.25rem; width: 3.25rem; top: -2px; left: -2px"
+          ></div>
+          <img :src="user.photoURL" alt="" class="absolute rounded-full h-full w-full object-cover hover:opacity-90" />
         </div>
       </router-link>
       <LanguageSwitcher class="w-full px-12 pb-12" />

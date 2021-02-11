@@ -1,7 +1,7 @@
 <template>
   <div class="text-3xl pt-20 md:pt-4 p-4 pl-4 md:pl-48 text-white">
     <div class="flex flex-col justify-center md:justify-start">
-      <div class="header relative w-full text-3xl pt-0 md:pt-4 pb-4 text-center flex focus:outline-none">
+      <div class="header relative w-full text-3xl pt-0 md:pt-4 pb-4 pl-10 text-center flex focus:outline-none">
         <span
           class="absolute top-0 left-0 p-2 md:p-3 mt-0 md:mt-2 hover:bg-gray-800 rounded-full cursor-pointer"
           @click="$router.go(-1)"

@@ -3,7 +3,7 @@
     <div class="h-full w-full flex flex-row flex-wrap">
       <div v-for="album of albums" :key="album.title">
         <div
-          class="relative h-40 md:h-64 w-40 md:w-64 my-4 mr-4 cursor-pointer rounded-lg flex items-center justify-center bg-gray-800"
+          class="relative h-40 md:h-64 w-40 md:w-64 my-4 mr-4 cursor-pointer rounded-lg bg-gray-800"
           @click="selectAlbum(album.id)"
         >
           <img
@@ -14,7 +14,7 @@
             v-if="album.photos.length > 0"
           />
         </div>
-        <div class="albums__album-info text-sm mr-4 text-center">
+        <div class="albums__album-info text-sm mr-4 text-center text-wrap w-40 md:w-64">
           <p class="font-bold text-base">{{ album.title }}</p>
           <p>{{ album.photos.length }} {{ $tc('album.photo', album.photos.length) }}</p>
         </div>

@@ -4,7 +4,9 @@
     :class="{ ' cursor-pointer': hasEditPermission }"
     @click="editDescription()"
   >
-    <div class="p-4 h-full whitespace-pre" v-show="!isTextAreaDisplayed">{{ description }}</div>
+    <div class="p-4" v-show="!isTextAreaDisplayed">
+      <p class="whitespace-pre-wrap">{{ description }}</p>
+    </div>
     <span class="absolute top-0 right-0 mr-2 mt-2" v-if="hasEditPermission">
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Hero from '@/components/Hero.vue'
-import { getUser } from '../services/firebase'
+import { vxm } from '../store/store.vuex'
 import { store } from '../store/store.vuex'
 
 Vue.use(VueRouter)
@@ -75,8 +75,7 @@ router.beforeEach((to, from, next) => {
     next()
   } else {
     storeInit.then(() => {
-      const currentUser = getUser()?.email === 'bt.bich@gmail.com' || getUser()?.email === 'minhchi1211@gmail.com'
-      if (!currentUser) {
+      if (!vxm.user.hasEditPermission) {
         next('/login')
       } else {
         next()
